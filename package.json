@@ -1,0 +1,24 @@
+{
+  "name": "sportify-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swells2020/sportify-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swells2020/sportify-project/issues"
+  },
+  "homepage": "https://github.com/swells2020/sportify-project#readme",
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-plugin-react": "^7.30.1"
+  }
+}
