@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img {
+  height: 200px;
+}
+
+.carousel-sport {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sports-slide {
+  width: 30%;
+}
+
+.carousel-indicators {
+  visibility: hidden !important;
+}
+.event-item {
+  padding: 50px;
+}
+.carousel-control-next-icon {
+  visibility: hidden !important;
+}
+.carousel-control-prev-icon {
+  visibility: hidden !important;
+}
