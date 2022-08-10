@@ -9,6 +9,7 @@ import {
 import { db } from "../config/firebase";
 import { useEffect, useState } from "react";
 import SingleItemMap from "./SingleItemMap";
+import EventHostProfile from "./EventHostProfile";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import UserContext from "../react-contexts/UserContext";
@@ -86,6 +87,8 @@ function SingleEvent() {
       <p>
         Capacity: {singleEvent.currentCapacity}/{singleEvent.capacity}
       </p>
+      <p>More Info: {singleEvent.desc}</p>
+      <EventHostProfile singleEvent={singleEvent} />
       <SingleItemMap singleEvent={singleEvent} />
       {button}
       <Modal show={show} onHide={handleClose}>
