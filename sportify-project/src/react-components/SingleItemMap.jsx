@@ -21,6 +21,7 @@ function SingleItemMap({ singleEvent }) {
           <GoogleMap
             options={{
               disableDefaultUI: true,
+              gestureHandling: 'greedy',
             }}
             mapContainerStyle={mapStyles}
             zoom={13}
