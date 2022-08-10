@@ -6,6 +6,9 @@ import Home from "../react-pages/Home";
 import SignUp from "../react-components/Signup";
 import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
+import SingleEvent from '../react-components/SingleEvent';
+import NavBar from '../react-components/NavBar';
+
 
 const Unauthorised = (props) => {
   const [show, setShow] = useState(false);
@@ -17,6 +20,7 @@ const Unauthorised = (props) => {
   return (
     <div>
       <Container>
+        <Header />
         <h1>UnauthorisedApp</h1>
         <h2>Not signed in.</h2>
         <nav>
@@ -41,7 +45,9 @@ const Unauthorised = (props) => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/passwordreset" element={<PasswordReset />} />
+          <Route path="/events/:eventId" element={<SingleEvent />} />
         </Routes>
+        <NavBar />
       </Container>
     </div>
   );
