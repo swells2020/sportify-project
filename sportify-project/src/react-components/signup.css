@@ -1,0 +1,21 @@
+.tabs {
+    background: transparent;
+}
+
+.loginHeader {
+    text-align: center;
+    border-bottom: 1px solid #ededed;
+    padding: 8px;
+}
+
+.loginHeaderDiv {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.loginHeaderButtons {
+    margin: 5px;
+    padding: 8px;
+}
