@@ -1,19 +1,19 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from "react-router-dom";
 import {
   getDoc,
   doc,
   updateDoc,
   increment,
   arrayUnion,
-} from 'firebase/firestore';
-import { db } from '../config/firebase';
-import { useEffect, useState } from 'react';
-import SingleItemMap from './SingleItemMap';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import UserContext from '../react-contexts/UserContext';
-import { useContext } from 'react';
-import { useAuth } from '../react-contexts/AuthenticationContext';
+} from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useEffect, useState } from "react";
+import SingleItemMap from "./SingleItemMap";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import UserContext from "../react-contexts/UserContext";
+import { useContext } from "react";
+import { useAuth } from "../react-contexts/AuthenticationContext";
 
 function SingleEvent() {
   const { currentUser } = useAuth();
@@ -30,17 +30,17 @@ function SingleEvent() {
       return { ...prev, currentCapacity: prev.currentCapacity + 1 };
     });
 
-    const eventRef = doc(db, 'events', eventId);
+    const eventRef = doc(db, "events", eventId);
     updateDoc(eventRef, { currentCapacity: increment(1) });
 
-    const userRef = doc(db, 'users', user.userId);
+    const userRef = doc(db, "users", user.userId);
     updateDoc(userRef, { events: arrayUnion(eventId) });
 
     setShow(false);
   };
 
   useEffect(() => {
-    const docRef = doc(db, 'events', eventId);
+    const docRef = doc(db, "events", eventId);
     getDoc(docRef).then((data) => {
       setSingleEvent({ ...data.data(), eventId });
     });
@@ -54,7 +54,11 @@ function SingleEvent() {
 
   let button;
   if (!currentUser) {
-    button = <></>;
+    button = (
+      <Link to="/login">
+        <Button>LogIn to book this event</Button>
+      </Link>
+    );
   } else if (booked) {
     button = (
       <Button variant="primary" disabled>
