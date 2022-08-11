@@ -8,6 +8,7 @@ import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
 import SingleEvent from '../react-components/SingleEvent';
 import NavBar from '../react-components/NavBar';
+import Header from "../react-components/Header";
 
 
 const Unauthorised = (props) => {
@@ -22,7 +23,6 @@ const Unauthorised = (props) => {
       <Container>
         <Header />
         <h1>UnauthorisedApp</h1>
-        <h2>Not signed in.</h2>
         <nav>
           <Link to="/home">
             <Button>Home</Button>
@@ -47,7 +47,7 @@ const Unauthorised = (props) => {
           <Route path="/passwordreset" element={<PasswordReset />} />
           <Route path="/events/:eventId" element={<SingleEvent />} />
         </Routes>
-        <NavBar />
+        <NavBar setShow={setShow}/>
       </Container>
     </div>
   );
