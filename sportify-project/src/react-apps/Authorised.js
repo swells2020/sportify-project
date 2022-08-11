@@ -10,6 +10,7 @@ import Header from "../react-components/Header";
 import Home from "../react-components/Home";
 import LogOut from "../react-components/LogOut";
 import SingleEvent from "../react-components/SingleEvent";
+import UserProfile from '../react-components/UserProfile';
 
 const Authorised = (props) => {
   const { currentUser } = useAuth();
@@ -22,6 +23,7 @@ const Authorised = (props) => {
     });
   }, [currentUser]);
 
+
   return (
     <UserContext.Provider value={user}>
       <Container>
@@ -33,6 +35,7 @@ const Authorised = (props) => {
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/events/:eventId" element={<SingleEvent />} />
+          <Route path="/users/:userId" element={<UserProfile />} />
         </Routes>
         <NavBar />
       </Container>

@@ -33,7 +33,7 @@ const Login = ({ setLoginComponent }) => {
   return (
     <>
       <header className="loginHeader">
-        <h2 className="text-center mb-4">Sign Up</h2>
+        <h2 className="text-center mb-4">Log In</h2>
 
         <div className="loginHeaderDiv">
           <div className="loginHeaderButtons">

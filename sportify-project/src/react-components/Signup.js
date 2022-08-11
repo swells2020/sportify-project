@@ -13,6 +13,7 @@ const SignUp = ({ setLoginComponent }) => {
   const navigate = useNavigate();
   const { signUp } = useAuth();
 
+
   function switchComponent() {
     setLoginComponent("Log In");
   }
@@ -27,8 +28,13 @@ const SignUp = ({ setLoginComponent }) => {
     try {
       setError("");
       setLoading(true);
-      await signUp(emailRef.current.value, passwordRef.current.value);
-      navigate("/home");
+      await signUp(emailRef.current.value, passwordRef.current.value)
+      .then(({ user }) => {
+        
+        navigate(`/users/${user.uid}`);
+      })
+      
+      
     } catch {
       setError("Failed to create an account, please try again.");
       setLoading(false);
@@ -90,7 +96,7 @@ const SignUp = ({ setLoginComponent }) => {
               required
             ></Form.Control>
           </Form.Group>
-          <Button disabled={loading} className="w-100 mt-4" type="submit">
+          <Button disabled={loading} type="submit">
             Sign Up
           </Button>
         </Form>

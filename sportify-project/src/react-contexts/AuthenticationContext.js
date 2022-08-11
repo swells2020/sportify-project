@@ -5,13 +5,24 @@ import {
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
 
 const AuthenticationContext = createContext();
+const storage = getStorage();
 
 export function useAuth() {
   return useContext(AuthenticationContext);
+}
+
+export async function uploadAvatar(newAvatar, currentUser) {
+  const fileRef = ref(storage, currentUser.uid + ".png");
+  const snapshot = await uploadBytes(fileRef, newAvatar);
+  const photoURL = await getDownloadURL(fileRef);
+
+  updateProfile(currentUser, {photoURL: photoURL});
 }
 
 export function AuthenticationContextProvider({ children }) {
@@ -34,9 +45,13 @@ export function AuthenticationContextProvider({ children }) {
     return signOut(auth);
   }
 
+  
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      // console.log(user)
       setLoading(false);
     });
 

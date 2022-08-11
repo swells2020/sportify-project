@@ -2,8 +2,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { AiOutlineHome, AiOutlineBell, AiOutlineUser } from "react-icons/ai";
+import { useAuth } from '../react-contexts/AuthenticationContext';
 
-function NavBar() {
+function NavBar({setShow}) {
+  const { currentUser } = useAuth();
+  const handleShow = () => setShow(true);
   return (
     <Navbar
       activeKey="/home"
@@ -22,9 +25,10 @@ function NavBar() {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item style={{ padding: "10px" }}>
-        <Nav.Link href="/profile">
+      {currentUser ? <Nav.Link href={`/users/${currentUser.uid}`}>
           <AiOutlineUser size={40} />
-        </Nav.Link>
+        </Nav.Link> : <Nav.Link onClick={handleShow}><AiOutlineUser size={35} /> </Nav.Link>}
+
       </Nav.Item>
     </Navbar>
   );
