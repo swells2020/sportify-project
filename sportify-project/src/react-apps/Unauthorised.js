@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
+
 import { Button, Container, Modal } from "react-bootstrap";
 import { useState } from "react"
-import Home from "../react-pages/Home";
+import Home from "../react-components/Home";
+import Header from "../react-components/Header";
 import SignUp from "../react-components/Signup";
 import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
@@ -21,8 +23,6 @@ const Unauthorised = (props) => {
     <div>
       <Container>
         <Header />
-        <h1>UnauthorisedApp</h1>
-        <h2>Not signed in.</h2>
         <nav>
           <Link to="/home">
             <Button>Home</Button>
@@ -48,6 +48,8 @@ const Unauthorised = (props) => {
           <Route path="/events/:eventId" element={<SingleEvent />} />
         </Routes>
         <NavBar />
+        <p>UnauthorisedApp</p>
+        <p>Not signed in.</p>
       </Container>
     </div>
   );

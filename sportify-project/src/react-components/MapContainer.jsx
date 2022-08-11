@@ -6,8 +6,10 @@ import {
 } from '@react-google-maps/api';
 import { useState } from 'react';
 import LocationsCarousel from './Carousel';
+import { useAuth } from '../react-contexts/AuthenticationContext';
 
 function MapContainer({ events, mapCenter }) {
+  const { currentUser } = useAuth();
   const [selectedLocation, setSelectedLocation] = useState({});
 
   const mapStyles = {
@@ -19,15 +21,21 @@ function MapContainer({ events, mapCenter }) {
     setSelectedLocation(item);
   };
 
+  let zoom = 7;
+  if (currentUser) {
+    zoom = 13;
+  }
+
   return (
     <>
       <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLEMAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={13}
+          zoom={zoom}
           center={mapCenter}
           options={{
             disableDefaultUI: true,
+            gestureHandling: 'greedy',
           }}
         >
           {events.map((item) => {
