@@ -31,3 +31,15 @@ img {
 .carousel-control-prev-icon {
   visibility: hidden !important;
 }
+
+.carousel-indicators {
+  visibility: hidden !important;
+}
+
+.carousel-control-prev {
+  visibility: hidden !important;
+}
+
+.carousel-control-next {
+  visibility: hidden !important;
+}
