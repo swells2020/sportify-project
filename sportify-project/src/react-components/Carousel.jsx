@@ -32,7 +32,7 @@ function LocationsCarousel({ events, selectedLocation }) {
                 color: "#f2f4f3",
               }}
             >
-              <h3>{event.name}</h3>
+              <h3>{event.title}</h3>
               <p>{event.level}</p>
               <Link to={`/events/${event.id}`}>
                 <p>View event</p>
