@@ -31,7 +31,7 @@ function Home() {
         })
         .then((response) => {
           const user = response.data();
-          const address = user.firstLineAddress + " " + user.postcode;
+          const address = user.location;
           Geocode.fromAddress(address).then(
             (response) => {
               const { lat, lng } = response.results[0].geometry.location;

@@ -1,11 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import {
-  getDoc,
-  doc,
-  updateDoc,
-  increment,
-  arrayUnion,
-} from "firebase/firestore";
+import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useEffect, useState } from "react";
 import SingleItemMap from "./SingleItemMap";
@@ -28,11 +22,14 @@ function SingleEvent() {
   const handleShow = () => setShow(true);
   const handleBook = () => {
     setSingleEvent((prev) => {
-      return { ...prev, currentCapacity: prev.currentCapacity + 1 };
+      return {
+        ...prev,
+        participants: [...prev.participants, user.username],
+      };
     });
 
     const eventRef = doc(db, "events", eventId);
-    updateDoc(eventRef, { currentCapacity: increment(1) });
+    updateDoc(eventRef, { participants: arrayUnion(user.username) });
 
     const userRef = doc(db, "users", user.userId);
     updateDoc(userRef, { events: arrayUnion(eventId) });
@@ -66,7 +63,10 @@ function SingleEvent() {
         You've booked this event
       </Button>
     );
-  } else if (singleEvent.capacity === singleEvent.currentCapacity) {
+  } else if (
+    Object.keys(singleEvent).length &&
+    singleEvent.capacity === singleEvent.participants.length
+  ) {
     button = (
       <Button variant="primary" disabled>
         Event is fully booked
@@ -78,19 +78,22 @@ function SingleEvent() {
         Book Event
       </Button>
     );
-
   return (
     <>
-      <h2>{singleEvent.name}</h2>
-      <p>Sport: {singleEvent.type}</p>
-      <p>Level: {singleEvent.level}</p>
-      <p>
-        Capacity: {singleEvent.currentCapacity}/{singleEvent.capacity}
-      </p>
-      <p>More Info: {singleEvent.desc}</p>
-      <EventHostProfile singleEvent={singleEvent} />
-      <SingleItemMap singleEvent={singleEvent} />
-      {button}
+      {Object.keys(singleEvent).length && (
+        <>
+          <h2>{singleEvent.title}</h2>
+          <p>Sport: {singleEvent.type}</p>
+          <p>Level: {singleEvent.level}</p>
+          <p>
+            Capacity: {singleEvent.participants.length}/{singleEvent.capacity}
+          </p>
+          <p>More Info: {singleEvent.description}</p>
+          <EventHostProfile singleEvent={singleEvent} />
+          <SingleItemMap singleEvent={singleEvent} />
+          {button}
+        </>
+      )}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Are you sure you want to book this event?</Modal.Title>
