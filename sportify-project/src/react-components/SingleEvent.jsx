@@ -1,5 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useEffect, useState } from "react";
 import SingleItemMap from "./SingleItemMap";
@@ -20,6 +26,23 @@ function SingleEvent() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleCancel = () => {
+    setBooked(false);
+    setSingleEvent((prev) => {
+      const filterParts = prev.participants.filter(
+        (username) => username !== user.username
+      );
+      return {
+        ...prev,
+        participants: [...filterParts],
+      };
+    });
+    const eventRef = doc(db, "events", eventId);
+    updateDoc(eventRef, { participants: arrayRemove(user.username) });
+
+    const userRef = doc(db, "users", user.userId);
+    updateDoc(userRef, { events: arrayRemove(eventId) });
+  };
   const handleBook = () => {
     setSingleEvent((prev) => {
       return {
@@ -35,6 +58,7 @@ function SingleEvent() {
     updateDoc(userRef, { events: arrayUnion(eventId) });
 
     setShow(false);
+    setBooked(true);
   };
 
   useEffect(() => {
@@ -42,13 +66,18 @@ function SingleEvent() {
     getDoc(docRef).then((data) => {
       setSingleEvent({ ...data.data(), eventId });
     });
+  }, [eventId, user]);
 
+  useEffect(() => {
     if (currentUser) {
       if (user.events && user.events.includes(eventId)) {
+        console.log(user.events);
         setBooked(true);
       }
+    } else {
+      setBooked(false);
     }
-  }, [eventId, user]);
+  }, [setSingleEvent, user, singleEvent, eventId, currentUser]);
 
   let button;
   if (!currentUser) {
@@ -59,8 +88,8 @@ function SingleEvent() {
     );
   } else if (booked) {
     button = (
-      <Button variant="primary" disabled>
-        You've booked this event
+      <Button variant="primary" onClick={handleCancel}>
+        Cancel your booking
       </Button>
     );
   } else if (
