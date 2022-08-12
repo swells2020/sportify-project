@@ -7,10 +7,33 @@ import {
 import { useState } from 'react';
 import LocationsCarousel from './Carousel';
 import { useAuth } from '../react-contexts/AuthenticationContext';
+import Geocode from 'react-geocode';
+import { useEffect } from 'react';
 
 function MapContainer({ events, mapCenter }) {
   const { currentUser } = useAuth();
   const [selectedLocation, setSelectedLocation] = useState({});
+  const [updatedEvents, setUpdatedEvents] = useState([]);
+
+  useEffect(() => {
+    const promises = events.map((event) => {
+      return Geocode.fromAddress(event.location).then(
+        (response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+          event.lat = lat;
+          event.lng = lng;
+          return event;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    });
+
+    Promise.all([...promises]).then((events) => {
+      setUpdatedEvents(events);
+    });
+  }, [events]);
 
   const mapStyles = {
     height: '50vh',
@@ -38,11 +61,11 @@ function MapContainer({ events, mapCenter }) {
             gestureHandling: 'greedy',
           }}
         >
-          {events.map((item) => {
+          {updatedEvents.map((item) => {
             return (
               <Marker
                 key={item.id}
-                position={{ lat: item.location._lat, lng: item.location._long }}
+                position={{ lat: item.lat, lng: item.lng }}
                 onClick={() => onSelect(item)}
               />
             );
@@ -50,13 +73,13 @@ function MapContainer({ events, mapCenter }) {
           {selectedLocation.location && (
             <InfoWindow
               position={{
-                lat: selectedLocation.location._lat,
-                lng: selectedLocation.location._long,
+                lat: selectedLocation.lat,
+                lng: selectedLocation.lng,
               }}
               clickable={true}
               onCloseClick={() => setSelectedLocation({})}
             >
-              <p>{selectedLocation.name}</p>
+              <p>{selectedLocation.title}</p>
             </InfoWindow>
           )}
           ;
