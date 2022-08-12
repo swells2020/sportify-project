@@ -96,7 +96,7 @@ const SignUp = ({ setLoginComponent }) => {
               required
             ></Form.Control>
           </Form.Group>
-          <Button disabled={loading} type="submit">
+          <Button disabled={loading} type="submit" className="w-100 mt-4">
             Sign Up
           </Button>
         </Form>

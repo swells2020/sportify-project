@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Navbar, NavDropdown } from "react-bootstrap";
 import {
   AiOutlineHome,
   AiOutlineBell,
@@ -9,47 +9,119 @@ import {
   AiOutlineHeart,
 } from "react-icons/ai";
 import { useAuth } from "../react-contexts/AuthenticationContext";
+import "./navbar.css";
 
 function NavBar({ setShow }) {
+  const [error, setError] = useState();
   const { currentUser } = useAuth();
   const handleShow = () => setShow(true);
+  const { logOut } = useAuth();
+
+  async function handleSignOut() {
+    setError("");
+    try {
+      await logOut();
+    } catch {
+      setError("Failed to sign out, please try again");
+    }
+  }
   return (
     <Navbar
       activeKey="/home"
       fixed="bottom"
       bg="light"
       className="justify-content-center"
+      style={{ borderTop: "1px solid #bebebe", height: "60px" }}
     >
-      <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
+      <Nav.Item
+        style={{
+          padding: "10px",
+          paddingRight: "30px",
+          textAlign: "center",
+          fontSize: "12px",
+        }}
+      >
         <Nav.Link href="/">
-          <AiOutlineHome size={40} />
+          <AiOutlineHome size={30} />
         </Nav.Link>
+        Home
       </Nav.Item>
-      <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
-        <Nav.Link href="/wishlist">
-          <AiOutlineHeart size={40} />
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
-        <Nav.Link href="/schedule">
-          <AiOutlineCalendar size={40} />
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
-        <Nav.Link href="/alerts">
-          <AiOutlineBell size={40} />
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item style={{ padding: "10px" }}>
+      <Nav.Item
+        style={{
+          padding: "10px",
+          paddingRight: "30px",
+          textAlign: "center",
+          fontSize: "12px",
+        }}
+      >
         {currentUser ? (
-          <Nav.Link href={`/users/${currentUser.uid}`}>
-            <AiOutlineUser size={40} />
+          <NavDropdown title={<AiOutlineUser size={30} />} drop="up">
+            <NavDropdown.Item href={`/users/${currentUser.uid}`}>
+              View Profile
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={handleSignOut}>Log Out</NavDropdown.Item>
+          </NavDropdown>
+        ) : (
+          <Nav.Link onClick={handleShow}>
+            <AiOutlineUser size={30} />
+          </Nav.Link>
+        )}
+        Profile
+      </Nav.Item>
+      <Nav.Item
+        style={{
+          padding: "10px",
+          paddingRight: "30px",
+          textAlign: "center",
+          fontSize: "12px",
+        }}
+      >
+        {currentUser ? (
+          <Nav.Link href="/schedule">
+            <AiOutlineCalendar size={30} />
           </Nav.Link>
         ) : (
           <Nav.Link onClick={handleShow}>
-            <AiOutlineUser size={35} />{" "}
+            <AiOutlineCalendar size={30} />
           </Nav.Link>
         )}
+        Schedule
+      </Nav.Item>
+      <Nav.Item
+        style={{
+          padding: "10px",
+          paddingRight: "30px",
+          textAlign: "center",
+          fontSize: "12px",
+        }}
+      >
+        {currentUser ? (
+      <Nav.Link href="/alerts">
+      <AiOutlineBell size={30} />
+    </Nav.Link>
+      ) : (
+        <Nav.Link onClick={handleShow}>
+          <AiOutlineBell size={30} />
+        </Nav.Link>
+      )}
+  
+        Alerts
+      </Nav.Item>
+      <Nav.Item
+        style={{ padding: "10px", textAlign: "center", fontSize: "12px" }}
+      >
+        {currentUser ? (
+        <Nav.Link href="/wishlist">
+        <AiOutlineHeart size={30} />
+      </Nav.Link>
+      ) : (
+        <Nav.Link onClick={handleShow}>
+          <AiOutlineHeart size={30} />
+        </Nav.Link>
+      )}
+
+        Wishlist
       </Nav.Item>
     </Navbar>
   );
