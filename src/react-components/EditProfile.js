@@ -6,7 +6,6 @@ import {
   Modal,
   InputGroup,
   CloseButton,
-  Image,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -50,7 +49,7 @@ const EditProfile = () => {
                 ></Form.Control>
               </Form.Group>
               <Button
-                className="w-100 mt-4"
+                className="w-100 mt-4 h-38"
                 type="submit"
                 disabled={!newAvatar}
               >
