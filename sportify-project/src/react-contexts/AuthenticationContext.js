@@ -25,6 +25,19 @@ export async function uploadAvatar(newAvatar, currentUser) {
   updateProfile(currentUser, {photoURL: photoURL});
 }
 
+export async function getUserAvatar(user, userId, setUserAvatar) {
+  if (user.photoURL) {
+    const fileRef = ref(storage, userId + ".png");
+    const userPhotoURL = await getDownloadURL(fileRef);
+    setUserAvatar(userPhotoURL);
+  } else {
+    const fileRef = ref(storage, "default-profile-icon-6.jpg");
+    const userPhotoURL = await getDownloadURL(fileRef);
+    setUserAvatar(userPhotoURL);
+  }
+
+}
+
 export function AuthenticationContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
