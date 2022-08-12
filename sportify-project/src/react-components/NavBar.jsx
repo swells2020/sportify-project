@@ -1,10 +1,16 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import { AiOutlineHome, AiOutlineBell, AiOutlineUser } from "react-icons/ai";
-import { useAuth } from '../react-contexts/AuthenticationContext';
+import {
+  AiOutlineHome,
+  AiOutlineBell,
+  AiOutlineUser,
+  AiOutlineCalendar,
+  AiOutlineHeart,
+} from "react-icons/ai";
+import { useAuth } from "../react-contexts/AuthenticationContext";
 
-function NavBar({setShow}) {
+function NavBar({ setShow }) {
   const { currentUser } = useAuth();
   const handleShow = () => setShow(true);
   return (
@@ -20,15 +26,30 @@ function NavBar({setShow}) {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
+        <Nav.Link href="/wishlist">
+          <AiOutlineHeart size={40} />
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
+        <Nav.Link href="/schedule">
+          <AiOutlineCalendar size={40} />
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item style={{ padding: "10px", paddingRight: "30px" }}>
         <Nav.Link href="/alerts">
           <AiOutlineBell size={40} />
         </Nav.Link>
       </Nav.Item>
       <Nav.Item style={{ padding: "10px" }}>
-      {currentUser ? <Nav.Link href={`/users/${currentUser.uid}`}>
-          <AiOutlineUser size={40} />
-        </Nav.Link> : <Nav.Link onClick={handleShow}><AiOutlineUser size={35} /> </Nav.Link>}
-
+        {currentUser ? (
+          <Nav.Link href={`/users/${currentUser.uid}`}>
+            <AiOutlineUser size={40} />
+          </Nav.Link>
+        ) : (
+          <Nav.Link onClick={handleShow}>
+            <AiOutlineUser size={35} />{" "}
+          </Nav.Link>
+        )}
       </Nav.Item>
     </Navbar>
   );
