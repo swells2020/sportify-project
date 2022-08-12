@@ -2,6 +2,7 @@
   "name": "sportify-project",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@react-google-maps/api": "^2.12.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "firebase-admin": "^11.0.1"
   }
 }
