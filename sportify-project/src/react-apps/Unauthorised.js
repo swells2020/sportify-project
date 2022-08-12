@@ -10,7 +10,7 @@ import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
 import SingleEvent from '../react-components/SingleEvent';
 import NavBar from '../react-components/NavBar';
-import Header from "../react-components/Header";
+
 
 
 const Unauthorised = (props) => {
