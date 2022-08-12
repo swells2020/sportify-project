@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
-
 import { Button, Container, Modal } from "react-bootstrap";
 import { useState } from "react";
 import Home from "../react-components/Home";
@@ -23,13 +22,6 @@ const Unauthorised = (props) => {
         <Header />
 
         <nav>
-          <Link to="/home">
-            <Button>Home</Button>
-          </Link>
-          <Button variant="primary" onClick={handleShow}>
-            Login
-          </Button>
-
           <Modal show={show} onHide={handleClose}>
             {loginComponent === "Log In" ? (
               <Login setLoginComponent={setLoginComponent} />
@@ -51,9 +43,6 @@ const Unauthorised = (props) => {
           <Route path="/events/:eventId" element={<SingleEvent />} />
         </Routes>
         <NavBar setShow={setShow} />
-        <NavBar />
-        <p>UnauthorisedApp</p>
-        <p>Not signed in.</p>
       </Container>
     </div>
   );
