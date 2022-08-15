@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../react-contexts/AuthenticationContext";
+import PasswordReset from "./PasswordReset";
 
 const Login = ({ setLoginComponent }) => {
   const [error, setError] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState()
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -66,11 +67,11 @@ const Login = ({ setLoginComponent }) => {
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group id="email">
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="mt-2">Email</Form.Label>
             <Form.Control type="email" ref={emailRef} required></Form.Control>
           </Form.Group>
           <Form.Group id="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="mt-2">Password</Form.Label>
             <Form.Control
               type="password"
               ref={passwordRef}
@@ -81,6 +82,7 @@ const Login = ({ setLoginComponent }) => {
             Log In
           </Button>
         </Form>
+        <div className="text-center mt-3" onClick={() => setLoginComponent("Forgotten Password")}><p>Forgotten Password?</p></div>
       </Modal.Body>
     </>
   );

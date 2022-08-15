@@ -41,13 +41,16 @@ export function AuthenticationContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signUp(username, email, password) {
+  function signUp(username, firstName, lastName, location, email, password) {
     const user = {};
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         const documentRef = doc(db, "users", user.uid);
         const data = {
           username: username,
+          firstName: firstName,
+          lastName: lastName,
+          location:location,
           email: email,
           uid: user.uid,
           sports: [],
@@ -56,6 +59,7 @@ export function AuthenticationContextProvider({ children }) {
           friends: [],
           events: [],
           wishlist: [],
+          hostRating: []
           photoURL: process.env.REACT_APP_DEFAULT_PROFILE_PICTURE
         };
         user = data;

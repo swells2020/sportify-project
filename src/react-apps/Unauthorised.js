@@ -20,7 +20,6 @@ const Unauthorised = (props) => {
     <div>
       <Container>
         <Header />
-
         <nav>
           <Modal show={show} onHide={handleClose}>
             {loginComponent === "Log In" ? (
@@ -29,10 +28,10 @@ const Unauthorised = (props) => {
             {loginComponent === "Sign Up" ? (
               <SignUp setLoginComponent={setLoginComponent} />
             ) : null}
+            {loginComponent === "Forgotten Password" ? (
+              <PasswordReset setLoginComponent={setLoginComponent} />
+            ) : null}
           </Modal>
-          <Link to="/passwordreset">
-            <Button>PasswordReset</Button>
-          </Link>
         </nav>
         <Routes>
           <Route exact path="/" element={<Home />} />
