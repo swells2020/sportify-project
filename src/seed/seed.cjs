@@ -1,8 +1,8 @@
 const admin = require("firebase-admin");
 const serviceAccount = require("./admin-key.json");
+const avatar = require("./avatar.json");
 const { firestore } = require("firebase-admin");
 const { Timestamp } = firestore;
-
 const app = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -26,6 +26,7 @@ const users = [
     wishlist: [],
     hostRating: 0,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 2,
@@ -43,6 +44,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 3,
@@ -60,6 +62,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 4,
@@ -77,6 +80,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 5,
@@ -94,6 +98,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 6,
@@ -111,6 +116,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 7,
@@ -128,6 +134,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 8,
@@ -145,6 +152,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 9,
@@ -162,6 +170,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
   {
     testuid: 10,
@@ -188,6 +197,7 @@ const users = [
     wishlist: [],
     hostRating: null,
     password: "test123",
+    photoURL: avatar.photoURL
   },
 ];
 
@@ -450,6 +460,7 @@ const seed = () => {
                 events: user.events,
                 wishlist: user.wishlist,
                 hostRating: user.hostRating,
+                photoURL: user.photoURL
               })
               .then(() => {
                 console.log(

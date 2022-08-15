@@ -18,8 +18,6 @@ const EditProfile = ({ userInfo }) => {
   const [newAvatar, setNewAvatar] = useState();
   const [show, setShow] = useState(false);
 
-  console.log(newUserInfo.DOB);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -27,8 +25,13 @@ const EditProfile = ({ userInfo }) => {
     setNewAvatar(e.target.files[0]);
   }
 
-  function handleAvatarSubmit() {
-    uploadAvatar(newAvatar, currentUser);
+  function handleAvatarSubmit(e) {
+    e.preventDefault();
+    uploadAvatar(newAvatar, currentUser)
+    .then((data) => {
+      const userRef = doc(db, "users", currentUser.uid);
+      updateDoc(userRef, {...userInfo, photoURL: data});
+    })
   }
 
   function handleUsernameChange(e) {

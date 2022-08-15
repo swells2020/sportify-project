@@ -22,8 +22,7 @@ export async function uploadAvatar(newAvatar, currentUser) {
   const fileRef = ref(storage, currentUser.uid + ".png");
   const snapshot = await uploadBytes(fileRef, newAvatar);
   const photoURL = await getDownloadURL(fileRef);
-
-  updateProfile(currentUser, { photoURL: photoURL });
+  return photoURL;
 }
 
 export async function getUserAvatar(user, userId) {
@@ -34,8 +33,6 @@ export async function getUserAvatar(user, userId) {
   } else {
     const fileRef = ref(storage, "default-profile-icon-6.jpg");
     const userPhotoURL = await getDownloadURL(fileRef);
-
-    console.log(userPhotoURL)
     return userPhotoURL;
   }
 }
@@ -53,6 +50,13 @@ export function AuthenticationContextProvider({ children }) {
           username: username,
           email: email,
           uid: user.uid,
+          sports: [],
+          followers: [],
+          following: [],
+          friends: [],
+          events: [],
+          wishlist: [],
+          photoURL: process.env.REACT_APP_DEFAULT_PROFILE_PICTURE
         };
         user = data;
         return setDoc(documentRef, data);

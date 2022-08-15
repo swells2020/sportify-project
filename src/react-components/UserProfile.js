@@ -1,6 +1,5 @@
 import {
   useAuth,
-  getUserAvatar,
 } from "../react-contexts/AuthenticationContext";
 import { Image, Container, Button, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -14,19 +13,14 @@ const UserProfile = () => {
   const { userId } = useParams();
   const [userInfo, setUserInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [userAvatar, setUserAvatar] = useState();
+  console.log(process.env);
 
   useEffect(() => {
     setIsLoading(true);
     const docRef = doc(db, "users", userId);
     getDoc(docRef).then((data) => {
       setUserInfo({ ...data.data()});
-      getUserAvatar(data.data(), userId)
-      .then((data) => {
-        setUserAvatar(data);
-        setIsLoading(false);
-      })
-      
+      setIsLoading(false);
     });
   }, [userId]);
 
@@ -40,7 +34,7 @@ const UserProfile = () => {
           <Container className="mt-3" style={{ textAlign: "center" }}>
             <Image
               style={{ width: "150px", height: "150px" }}
-              src={userAvatar}
+              src={userInfo.photoURL}
               roundedCircle="true"
             ></Image>
           </Container>
@@ -48,7 +42,7 @@ const UserProfile = () => {
             {userInfo.firstName && userInfo.lastName ? <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2> : <></>}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
             {currentUser.uid === userInfo.uid ? <EditProfile userInfo={userInfo} /> : <></>}
-            {userInfo.bio ? <p>userInfo.bio</p> : <></>}
+            {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
             {currentUser.uid === userInfo.uid ? (
               <></>
             ) : (
