@@ -7,6 +7,7 @@ import ScheduleList from "../react-components/ScheduleList";
 import PastEvents from "../react-components/PastEvents";
 import HostEvent from "../react-components/HostEvent";
 
+
 function Schedule() {
   const user = useContext(UserContext);
   const [schedule, setSchedule] = useState([]);
@@ -16,13 +17,11 @@ function Schedule() {
         const docRef = doc(db, "events", event);
         return getDoc(docRef);
       });
-
       Promise.all(eventRequests)
         .then((data) => {
           const scheduledEvents = data.map((scheduledEvent) => {
             return { ...scheduledEvent.data(), eventId: scheduledEvent.id };
           });
-
           scheduledEvents.sort(function (a, b) {
             return (
               new Date(a.date.seconds * 1000) - new Date(b.date.seconds * 1000)
