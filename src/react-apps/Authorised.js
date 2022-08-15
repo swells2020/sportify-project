@@ -11,6 +11,7 @@ import Home from "../react-components/Home";
 import SingleEvent from "../react-components/SingleEvent";
 import UserProfile from "../react-components/UserProfile";
 import Schedule from "../react-components/Schedule";
+import Chat from "../react-pages/Chat";
 
 const Authorised = (props) => {
   const { currentUser } = useAuth();
@@ -33,6 +34,7 @@ const Authorised = (props) => {
           <Route path="/events/:eventId" element={<SingleEvent />} />
           <Route path="/users/:userId" element={<UserProfile />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
         <NavBar />
       </Container>
