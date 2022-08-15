@@ -20,9 +20,13 @@ const UserProfile = () => {
     setIsLoading(true);
     const docRef = doc(db, "users", userId);
     getDoc(docRef).then((data) => {
-      setUserInfo({ ...data.data(), userId: userId });
-      getUserAvatar(data.data(), userId, setUserAvatar);
-      setIsLoading(false);
+      setUserInfo({ ...data.data()});
+      getUserAvatar(data.data(), userId)
+      .then((data) => {
+        setUserAvatar(data);
+        setIsLoading(false);
+      })
+      
     });
   }, [userId]);
 
@@ -41,9 +45,9 @@ const UserProfile = () => {
             ></Image>
           </Container>
           <Container className="mt-3" style={{ textAlign: "center" }}>
-            <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2>
+            {userInfo.firstName && userInfo.lastName ? <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2> : <></>}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
-            {currentUser.uid === userInfo.uid ? <EditProfile /> : <></>}
+            {currentUser.uid === userInfo.uid ? <EditProfile userInfo={userInfo} /> : <></>}
             {userInfo.bio ? <p>userInfo.bio</p> : <></>}
             {currentUser.uid === userInfo.uid ? (
               <></>
