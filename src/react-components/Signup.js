@@ -7,6 +7,7 @@ import "./signup.css";
 const SignUp = ({ setLoginComponent }) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -28,14 +29,8 @@ const SignUp = ({ setLoginComponent }) => {
     try {
       setError("");
       setLoading(true);
-      await signUp(emailRef.current.value, passwordRef.current.value)
-      .then(({ user }) => {
-        
-        navigate(`/users/${user.uid}`);
-      })
-      
-      
-    } catch {
+      await signUp(usernameRef.current.value, emailRef.current.value, passwordRef.current.value)
+    } catch (error) {
       setError("Failed to create an account, please try again.");
       setLoading(false);
     }
@@ -76,6 +71,10 @@ const SignUp = ({ setLoginComponent }) => {
       <Modal.Body>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+          <Form.Group id="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="username" ref={usernameRef} required></Form.Control>
+          </Form.Group>
           <Form.Group id="email">
             <Form.Label>Email</Form.Label>
             <Form.Control type="email" ref={emailRef} required></Form.Control>

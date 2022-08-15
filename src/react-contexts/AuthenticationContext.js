@@ -7,8 +7,9 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
+import { auth, db } from "../config/firebase";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 const AuthenticationContext = createContext();
 const storage = getStorage();
@@ -22,7 +23,7 @@ export async function uploadAvatar(newAvatar, currentUser) {
   const snapshot = await uploadBytes(fileRef, newAvatar);
   const photoURL = await getDownloadURL(fileRef);
 
-  updateProfile(currentUser, {photoURL: photoURL});
+  updateProfile(currentUser, { photoURL: photoURL });
 }
 
 export async function getUserAvatar(user, userId, setUserAvatar) {
@@ -33,17 +34,31 @@ export async function getUserAvatar(user, userId, setUserAvatar) {
   } else {
     const fileRef = ref(storage, "default-profile-icon-6.jpg");
     const userPhotoURL = await getDownloadURL(fileRef);
+    console.log(userPhotoURL);
     setUserAvatar(userPhotoURL);
   }
-
 }
 
 export function AuthenticationContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  function signUp(username, email, password) {
+    const user = {};
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        const documentRef = doc(db, "users", user.uid);
+        const data = {
+          username: username,
+          email: email,
+          uid: user.uid,
+        };
+        user = data;
+        return setDoc(documentRef, data);
+      })
+      .then(() => {
+        return user;
+      });
   }
 
   function logIn(email, password) {
@@ -57,9 +72,6 @@ export function AuthenticationContextProvider({ children }) {
   function logOut() {
     return signOut(auth);
   }
-
-  
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
