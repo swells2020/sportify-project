@@ -69,6 +69,7 @@ function HostEvent() {
                     return { ...prev, title: e.target.value };
                   })
                 }
+                required
               />
             </Form.Group>
             <Form.Group
@@ -85,6 +86,7 @@ function HostEvent() {
                     return { ...prev, description: e.target.value };
                   })
                 }
+                required
               />
             </Form.Group>
             <Form.Group
@@ -101,6 +103,7 @@ function HostEvent() {
                     return { ...prev, capacity: e.target.value };
                   })
                 }
+                required
               />
             </Form.Group>
             <Form.Group
@@ -116,6 +119,7 @@ function HostEvent() {
                     return { ...prev, date: e.target.value };
                   })
                 }
+                required
               />
             </Form.Group>
             <Form.Group
@@ -131,6 +135,7 @@ function HostEvent() {
                     return { ...prev, level: e.target.value };
                   })
                 }
+                required
               >
                 <option>Open this select menu...</option>
                 <option value="beginner">Beginner</option>
@@ -151,6 +156,7 @@ function HostEvent() {
                     return { ...prev, location: e.target.value };
                   })
                 }
+                required
               />
             </Form.Group>
             <Form.Group
@@ -166,6 +172,7 @@ function HostEvent() {
                     return { ...prev, tags: e.target.value };
                   })
                 }
+                required
               />
             </Form.Group>
             <Form.Group
@@ -181,6 +188,7 @@ function HostEvent() {
                     return { ...prev, type: e.target.value };
                   })
                 }
+                required
               >
                 <option>Open this select menu...</option>
                 <option value="tennis">Tennis</option>

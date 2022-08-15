@@ -1,11 +1,11 @@
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useState, useEffect } from "react";
 
 function SingleItemMap({ singleEvent }) {
   const [event, setEvent] = useState(false);
   const mapStyles = {
-    height: '50vh',
-    width: '100%',
+    height: "50vh",
+    width: "100%",
   };
   useEffect(() => {
     if (!Object.keys(singleEvent).length) {
@@ -21,20 +21,20 @@ function SingleItemMap({ singleEvent }) {
           <GoogleMap
             options={{
               disableDefaultUI: true,
-              gestureHandling: 'greedy',
+              gestureHandling: "greedy",
             }}
             mapContainerStyle={mapStyles}
             zoom={13}
             center={{
-              lat: event.location._lat,
-              lng: event.location._long,
+              lat: event.geolocation.lat,
+              lng: event.geolocation.lng,
             }}
           >
             <Marker
               key={event.eventId}
               position={{
-                lat: event.location._lat,
-                lng: event.location._long,
+                lat: event.geolocation.lat,
+                lng: event.geolocation.lng,
               }}
             />
             ;
