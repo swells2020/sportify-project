@@ -2,10 +2,14 @@ import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 
 function ScheduleList({ schedule }) {
+  const currDate = ~~(+new Date() / 1000);
+  const filteredSchedule = schedule.filter((event) => {
+    return event.date.seconds > currDate;
+  });
   return (
     <>
       <Accordion defaultActiveKey="0">
-        {schedule.map((event) => {
+        {filteredSchedule.map((event) => {
           const date = new Date(event.date.seconds * 1000);
           return (
             <Accordion.Item eventKey={event.eventId} key={event.eventId}>
