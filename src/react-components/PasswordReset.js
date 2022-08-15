@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Alert, Button, Card, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Alert, Button, Form, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../react-contexts/AuthenticationContext";
 
-const PasswordReset = (props) => {
+const PasswordReset = ({ setLoginComponent }) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -26,26 +26,24 @@ const PasswordReset = (props) => {
   }
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required></Form.Control>
-            </Form.Group>
-            <Button disabled={loading} className="w-100 mt-4" type="submit">
-              Send Help!
-            </Button>
-          </Form>
-          <div className="text-center mt-3">
-            <Link to="/login">Return to login page.</Link>
-          </div>
-        </Card.Body>
-      </Card>
-    </>
+    <Modal.Body>
+      <h2 className="text-center mb-4">Log In</h2>
+      {error && <Alert variant="danger">{error}</Alert>}
+      <Form onSubmit={handleSubmit}>
+        <Form.Group id="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" ref={emailRef} required></Form.Control>
+        </Form.Group>
+        <Button disabled={loading} className="w-100 mt-4" type="submit">
+          Send Help!
+        </Button>
+      </Form>
+      <div className="text-center mt-3">
+        <p className="text-center" onClick={() => setLoginComponent("Log In")}>
+          Return to login page.
+        </p>
+      </div>
+    </Modal.Body>
   );
 };
 

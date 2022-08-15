@@ -53,6 +53,7 @@ export function AuthenticationContextProvider({ children }) {
           username: username,
           email: email,
           uid: user.uid,
+          sports: [],
         };
         user = data;
         return setDoc(documentRef, data);

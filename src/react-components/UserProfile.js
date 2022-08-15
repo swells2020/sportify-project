@@ -48,7 +48,7 @@ const UserProfile = () => {
             {userInfo.firstName && userInfo.lastName ? <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2> : <></>}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
             {currentUser.uid === userInfo.uid ? <EditProfile userInfo={userInfo} /> : <></>}
-            {userInfo.bio ? <p>userInfo.bio</p> : <></>}
+            {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
             {currentUser.uid === userInfo.uid ? (
               <></>
             ) : (
