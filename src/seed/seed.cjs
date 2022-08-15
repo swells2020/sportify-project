@@ -24,7 +24,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: 0,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -42,7 +42,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -60,7 +60,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -78,7 +78,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -96,7 +96,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -114,7 +114,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -132,7 +132,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -150,7 +150,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -168,7 +168,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -195,7 +195,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
     photoURL: avatar.photoURL
   },
@@ -214,6 +214,7 @@ const events = [
     participants: ["Leez"],
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
+    geolocation: { lat: 53.4808, lng: -2.2426 },
   },
   {
     title: "Yoga with Apu",
@@ -227,6 +228,7 @@ const events = [
     participants: ["Leez", "Monty86"],
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
+    geolocation: { lat: 53.4808, lng: -2.2426 },
   },
   {
     title: "Yoga with Apu",
@@ -240,6 +242,7 @@ const events = [
     participants: ["Leez", "StupidSexyFlanders"],
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
+    geolocation: { lat: 53.4808, lng: -2.2426 },
   },
   {
     title: "Yoga with Apu",
@@ -253,6 +256,7 @@ const events = [
     participants: ["Leez", "StupidSexyFlanders", "HomerJ1956"],
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
+    geolocation: { lat: 53.4808, lng: -2.2426 },
   },
   {
     title: "Derby Velodrome Splits",
@@ -265,6 +269,7 @@ const events = [
     participants: ["Leez", "Monty86", "theDoc", "StupidSexyFlanders"],
     hostUsername: "Bartman",
     tags: ["#timetrials", "#twowheeledfun", "#britishcycling"],
+    geolocation: { lat: 53.4889, lng: -2.4338 },
   },
   {
     title: "Bank Holiday Sunday T20 Blast",
@@ -285,6 +290,7 @@ const events = [
     ],
     hostUsername: "HomerJ1956",
     tags: ["#owzat"],
+    geolocation: { lat: 53.4738, lng: -2.4438 },
   },
   {
     title: "Pro Tennis Ladder - Newcastle Tennis Club",
@@ -298,6 +304,7 @@ const events = [
     participants: [],
     hostUsername: "ChucklesWJS",
     tags: ["#wimbledonherewecome"],
+    geolocation: { lat: 53.5303, lng: -2.3853 },
   },
   {
     title: "Monsal Trail Parkrun",
@@ -311,6 +318,7 @@ const events = [
     participants: ["Leez", "Monty86"],
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
+    geolocation: { lat: 53.3492, lng: -2.2495 },
   },
   {
     title: "Monsal Trail Parkrun",
@@ -324,6 +332,7 @@ const events = [
     participants: ["Leez", "Monty86", "GrampA", "Lenny"],
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
+    geolocation: { lat: 53.5939, lng: -2.4305 },
   },
   {
     title: "Monsal Trail Parkrun",
@@ -337,6 +346,7 @@ const events = [
     participants: ["Leez", "Monty86", "GrampA", "Lenny", "StupidSexyFlanders"],
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
+    geolocation: { lat: 53.3959, lng: -2.5302 },
   },
   {
     title: "Monsal Trail Parkrun",
@@ -357,6 +367,7 @@ const events = [
     ],
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
+    geolocation: { lat: 53.5495, lng: -2.543 },
   },
   {
     title: "Bank Holiday Snowboarding at Tamworth",
@@ -370,6 +381,7 @@ const events = [
     participants: ["Leez", "Monty86"],
     hostUsername: "Bartman",
     tags: ["#cooldownthissummer"],
+    geolocation: { lat: 53.8392, lng: -2.7929 },
   },
   {
     title: "LGBT+ Charity 5-a-Side",
@@ -383,6 +395,7 @@ const events = [
     participants: ["Lenny", "ChucklesWJS"],
     hostUsername: "theDoc",
     tags: ["#inclusivefootball", "LGBT+"],
+    geolocation: { lat: 53.3299, lng: -2.5553 },
   },
   {
     title: "Women's Outdoor Goat Yoga",
@@ -396,6 +409,7 @@ const events = [
     participants: ["Leez", "Lenny"],
     hostUsername: "BlueSteel",
     tags: ["#yoga", "#wellness", "#selfcare"],
+    geolocation: { lat: 53.3495, lng: -2.3923 },
   },
 ];
 
@@ -500,6 +514,7 @@ const seed = () => {
             type: event.type,
             hostUsername: event.hostUsername,
             tags: event.tags,
+            geolocation: event.geolocation,
           })
           .then(() => {
             console.log(`Successfully added ${event.title} to firestore`);

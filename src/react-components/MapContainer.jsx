@@ -3,18 +3,18 @@ import {
   LoadScript,
   Marker,
   InfoWindow,
-} from '@react-google-maps/api';
-import { useState } from 'react';
-import LocationsCarousel from './Carousel';
-import { useAuth } from '../react-contexts/AuthenticationContext';
+} from "@react-google-maps/api";
+import { useState } from "react";
+import LocationsCarousel from "./Carousel";
+import { useAuth } from "../react-contexts/AuthenticationContext";
 
 function MapContainer({ events, mapCenter }) {
   const { currentUser } = useAuth();
   const [selectedLocation, setSelectedLocation] = useState({});
 
   const mapStyles = {
-    height: '50vh',
-    width: '100%',
+    height: "50vh",
+    width: "100%",
   };
 
   const onSelect = (item) => {
@@ -35,14 +35,17 @@ function MapContainer({ events, mapCenter }) {
           center={mapCenter}
           options={{
             disableDefaultUI: true,
-            gestureHandling: 'greedy',
+            gestureHandling: "greedy",
           }}
         >
           {events.map((item) => {
             return (
               <Marker
                 key={item.id}
-                position={{ lat: item.location._lat, lng: item.location._long }}
+                position={{
+                  lat: item.geolocation.lat,
+                  lng: item.geolocation.lng,
+                }}
                 onClick={() => onSelect(item)}
               />
             );
@@ -50,13 +53,13 @@ function MapContainer({ events, mapCenter }) {
           {selectedLocation.location && (
             <InfoWindow
               position={{
-                lat: selectedLocation.location._lat,
-                lng: selectedLocation.location._long,
+                lat: selectedLocation.geolocation.lat,
+                lng: selectedLocation.geolocation.lng,
               }}
               clickable={true}
               onCloseClick={() => setSelectedLocation({})}
             >
-              <p>{selectedLocation.name}</p>
+              <p>{selectedLocation.title}</p>
             </InfoWindow>
           )}
           ;

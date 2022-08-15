@@ -108,7 +108,7 @@ function SingleEvent() {
       </Button>
     );
   return (
-    <>
+    <section className="singleMapContainer">
       {Object.keys(singleEvent).length && (
         <>
           <h2>{singleEvent.title}</h2>
@@ -136,7 +136,7 @@ function SingleEvent() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </section>
   );
 }
 

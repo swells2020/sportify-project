@@ -96,30 +96,28 @@ function NavBar({ setShow }) {
         }}
       >
         {currentUser ? (
-      <Nav.Link href="/alerts">
-      <AiOutlineBell size={30} />
-    </Nav.Link>
-      ) : (
-        <Nav.Link onClick={handleShow}>
-          <AiOutlineBell size={30} />
-        </Nav.Link>
-      )}
-  
+          <Nav.Link href="/alerts">
+            <AiOutlineBell size={30} />
+          </Nav.Link>
+        ) : (
+          <Nav.Link onClick={handleShow}>
+            <AiOutlineBell size={30} />
+          </Nav.Link>
+        )}
         Alerts
       </Nav.Item>
       <Nav.Item
         style={{ padding: "10px", textAlign: "center", fontSize: "12px" }}
       >
         {currentUser ? (
-        <Nav.Link href="/wishlist">
-        <AiOutlineHeart size={30} />
-      </Nav.Link>
-      ) : (
-        <Nav.Link onClick={handleShow}>
-          <AiOutlineHeart size={30} />
-        </Nav.Link>
-      )}
-
+          <Nav.Link href="/wishlist">
+            <AiOutlineHeart size={30} />
+          </Nav.Link>
+        ) : (
+          <Nav.Link onClick={handleShow}>
+            <AiOutlineHeart size={30} />
+          </Nav.Link>
+        )}
         Wishlist
       </Nav.Item>
     </Navbar>
