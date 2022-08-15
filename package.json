@@ -13,6 +13,7 @@
     "firebase": "^9.9.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
+    "react-bootstrap-range-slider": "^3.0.8",
     "react-dom": "^18.2.0",
     "react-geocode": "^0.2.3",
     "react-icons": "^4.4.0",

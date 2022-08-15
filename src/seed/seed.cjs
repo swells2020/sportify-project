@@ -24,7 +24,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: 0,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -41,7 +41,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -58,7 +58,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -75,7 +75,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -92,7 +92,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -109,7 +109,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -126,7 +126,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -143,7 +143,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -160,7 +160,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
   {
@@ -186,7 +186,7 @@ const users = [
     following: [],
     events: [],
     wishlist: [],
-    hostRating: null,
+    hostRating: [],
     password: "test123",
   },
 ];
