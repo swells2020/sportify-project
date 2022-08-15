@@ -27,7 +27,6 @@ function NavBar({ setShow }) {
   }
   return (
     <Navbar
-      activekey="/home"
       fixed="bottom"
       bg="light"
       className="justify-content-center"
