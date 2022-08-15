@@ -7,13 +7,15 @@ import "./signup.css";
 const SignUp = ({ setLoginComponent }) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const locationRef = useRef();
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const navigate = useNavigate();
   const { signUp } = useAuth();
-
 
   function switchComponent() {
     setLoginComponent("Log In");
@@ -29,7 +31,14 @@ const SignUp = ({ setLoginComponent }) => {
     try {
       setError("");
       setLoading(true);
-      await signUp(usernameRef.current.value, emailRef.current.value, passwordRef.current.value)
+      await signUp(
+        usernameRef.current.value,
+        firstNameRef.current.value,
+        lastNameRef.current.value,
+        locationRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value
+      );
     } catch (error) {
       setError("Failed to create an account, please try again.");
       setLoading(false);
@@ -73,7 +82,35 @@ const SignUp = ({ setLoginComponent }) => {
         <Form onSubmit={handleSubmit}>
           <Form.Group id="username">
             <Form.Label className="mt-2">Username</Form.Label>
-            <Form.Control type="username" ref={usernameRef} required></Form.Control>
+            <Form.Control
+              type="username"
+              ref={usernameRef}
+              required
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group id="firstName">
+            <Form.Label className="mt-2">First Name</Form.Label>
+            <Form.Control
+              type="firstName"
+              ref={firstNameRef}
+              required
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group id="lastName">
+            <Form.Label className="mt-2">Last Name</Form.Label>
+            <Form.Control
+              type="lastName"
+              ref={lastNameRef}
+              required
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group id="Location">
+            <Form.Label className="mt-2">Location</Form.Label>
+            <Form.Control
+              type="location"
+              ref={locationRef}
+              required
+            ></Form.Control>
           </Form.Group>
           <Form.Group id="email">
             <Form.Label className="mt-2">Email</Form.Label>
