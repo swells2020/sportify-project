@@ -9,6 +9,7 @@ import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
 import SingleEvent from "../react-components/SingleEvent";
 import NavBar from "../react-components/NavBar";
+import UserProfile from "../react-components/UserProfile";
 
 const Unauthorised = (props) => {
   const [show, setShow] = useState(false);
@@ -19,7 +20,7 @@ const Unauthorised = (props) => {
   return (
     <div>
       <Container>
-        <Header />
+        {/* <Header /> */}
         <nav>
           <Modal show={show} onHide={handleClose}>
             {loginComponent === "Log In" ? (
@@ -36,10 +37,8 @@ const Unauthorised = (props) => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/passwordreset" element={<PasswordReset />} />
           <Route path="/events/:eventId" element={<SingleEvent />} />
+          <Route path="/users/:userId" element={<UserProfile />} />
         </Routes>
         <NavBar setShow={setShow} />
       </Container>

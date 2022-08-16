@@ -6,6 +6,7 @@ import {
   Modal,
   InputGroup,
   CloseButton,
+  Spinner
 } from "react-bootstrap";
 import { useState } from "react";
 import { Timestamp, doc, updateDoc } from "firebase/firestore";
@@ -16,6 +17,8 @@ const EditProfile = ({ userInfo }) => {
   const { currentUser } = useAuth();
   const [newUserInfo, setNewUserInfo] = useState(userInfo);
   const [newAvatar, setNewAvatar] = useState();
+  const [saveIsLoading, setSaveIsLoading] = useState(false);
+  const [avatarIsLoading, setAvatarIsLoading] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -27,10 +30,12 @@ const EditProfile = ({ userInfo }) => {
 
   function handleAvatarSubmit(e) {
     e.preventDefault();
+    setAvatarIsLoading(true);
     uploadAvatar(newAvatar, currentUser)
     .then((data) => {
       const userRef = doc(db, "users", currentUser.uid);
       updateDoc(userRef, {...userInfo, photoURL: data});
+      setAvatarIsLoading(false);
     })
   }
 
@@ -94,9 +99,11 @@ const EditProfile = ({ userInfo }) => {
 
   function handleSubmit (e) {
     e.preventDefault();
+    setSaveIsLoading(true);
     const userRef = doc(db, "users", currentUser.uid);
     updateDoc(userRef, {...newUserInfo})
     .then(() => {
+      setSaveIsLoading(false);
       handleClose();
     })
   }
@@ -129,7 +136,14 @@ const EditProfile = ({ userInfo }) => {
                 type="submit"
                 disabled={!newAvatar}
               >
-                Submit
+                Submit{avatarIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}
               </Button>
             </Form>
           </InputGroup>
@@ -283,7 +297,14 @@ const EditProfile = ({ userInfo }) => {
                 />
               </Form.Group>
             </Card>
-            <Button type="submit">Save Changes</Button>
+            <Button type="submit">Save Changes{saveIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}</Button>
           </Form>
         </Modal.Body>
       </Modal>
