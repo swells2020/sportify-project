@@ -1,23 +1,38 @@
-import { useEffect, useState } from "react";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { db } from '../config/firebase';
+import { Link } from 'react-router-dom';
+import { getDocs, doc, query, collection, where } from 'firebase/firestore';
 
 function EventHostProfile({ singleEvent }) {
   const [userHost, setUserHost] = useState({});
+  const [hostRating, setHostRating] = useState(0);
   useEffect(() => {
-    if (singleEvent.userId) {
-      const docRef = doc(db, "users", singleEvent.userId);
-      getDoc(docRef).then((data) => {
-        setUserHost({ ...data.data(), userId: singleEvent.userId });
+    if (singleEvent.hostUsername) {
+      const q = query(
+        collection(db, 'users'),
+        where('username', '==', singleEvent.hostUsername)
+      );
+      getDocs(q).then((data) => {
+        data.forEach((user) => {
+          setUserHost({ ...user.data(), userId: user.id });
+          const userData = user.data();
+          let total = 0;
+
+          userData.rating.forEach((rating) => {
+            total += +rating.value;
+          });
+          const rating = total / userData.rating.length;
+          const roundedRating = rating.toFixed(2);
+          setHostRating(roundedRating);
+        });
       });
     }
-  }, [singleEvent.userId]);
+  }, [singleEvent]);
   return (
     <>
       <img src={userHost.imageURL} alt={userHost.username} />
       <p>{userHost.username}</p>
-      <p>Rating: {userHost.rating}</p>
+      <p>Rating: {hostRating}</p>
       <Link to={`/users/${userHost.userId}`}>View Profile</Link>
     </>
   );

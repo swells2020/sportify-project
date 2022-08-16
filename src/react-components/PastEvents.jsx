@@ -1,9 +1,9 @@
-import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/Button";
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import RangeSlider from "react-bootstrap-range-slider";
-import Form from "react-bootstrap/Form";
+import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import RangeSlider from 'react-bootstrap-range-slider';
+import Form from 'react-bootstrap/Form';
 import {
   collection,
   query,
@@ -12,15 +12,16 @@ import {
   updateDoc,
   arrayUnion,
   doc,
-} from "firebase/firestore";
-import { db } from "../config/firebase";
+} from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 function PastEvents({ schedule }) {
   const currDate = ~~(+new Date() / 1000);
   const [show, setShow] = useState(false);
   const [value, setValue] = useState(3);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const [comment, setComment] = useState(null);
+  const [filteredSchedule, setFilteredSchedule] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = (username) => {
     setUsername(username);
@@ -28,20 +29,25 @@ function PastEvents({ schedule }) {
   };
 
   const handleSubmit = () => {
-    const q = query(collection(db, "users"), where("username", "==", username));
+    const q = query(collection(db, 'users'), where('username', '==', username));
     getDocs(q).then((data) => {
       data.forEach((user) => {
         const uid = user.data().uid;
-        const userRef = doc(db, "users", uid);
+        const userRef = doc(db, 'users', uid);
         updateDoc(userRef, { rating: arrayUnion({ value, comment }) });
       });
     });
     setShow(false);
   };
 
-  const filteredSchedule = schedule.filter((event) => {
-    return event.date.seconds < currDate;
-  });
+  useEffect(() => {
+    if (schedule) {
+      const filtered = schedule.filter((event) => {
+        return event.date.seconds < currDate;
+      });
+      setFilteredSchedule(filtered);
+    }
+  }, [schedule]);
 
   return (
     <>
@@ -75,32 +81,33 @@ function PastEvents({ schedule }) {
         </Modal.Footer>
       </Modal>
       <Accordion defaultActiveKey="0">
-        {filteredSchedule.map((event) => {
-          const date = new Date(event.date.seconds * 1000);
-          return (
-            <Accordion.Item eventKey={event.eventId} key={event.eventId}>
-              <Accordion.Header>
-                {event.title} {date.toLocaleTimeString("en-UK")},{" "}
-                {date.toLocaleDateString("en-UK")}
-              </Accordion.Header>
-              <Accordion.Body>{event.description} </Accordion.Body>
-              <Accordion.Body>Type: {event.type} </Accordion.Body>
-              <Accordion.Body>Level: {event.level} </Accordion.Body>
-              <Accordion.Body>Level: {event.eventId} </Accordion.Body>
-              <Accordion.Body>
-                Participants: {event.participants.join(", ")}
-              </Accordion.Body>
-              <Accordion.Body>
-                <Button
-                  variant="primary"
-                  onClick={() => handleShow(event.hostUsername)}
-                >
-                  Rate this event
-                </Button>
-              </Accordion.Body>
-            </Accordion.Item>
-          );
-        })}
+        {schedule &&
+          filteredSchedule.map((event) => {
+            const date = new Date(event.date.seconds * 1000);
+            return (
+              <Accordion.Item eventKey={event.eventId} key={event.eventId}>
+                <Accordion.Header>
+                  {event.title} {date.toLocaleTimeString('en-UK')},{' '}
+                  {date.toLocaleDateString('en-UK')}
+                </Accordion.Header>
+                <Accordion.Body>{event.description} </Accordion.Body>
+                <Accordion.Body>Type: {event.type} </Accordion.Body>
+                <Accordion.Body>Level: {event.level} </Accordion.Body>
+                <Accordion.Body>Level: {event.eventId} </Accordion.Body>
+                <Accordion.Body>
+                  Participants: {event.participants.join(', ')}
+                </Accordion.Body>
+                <Accordion.Body>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleShow(event.hostUsername)}
+                  >
+                    Rate this event
+                  </Button>
+                </Accordion.Body>
+              </Accordion.Item>
+            );
+          })}
       </Accordion>
     </>
   );

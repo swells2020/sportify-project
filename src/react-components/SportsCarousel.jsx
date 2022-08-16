@@ -45,16 +45,16 @@ function SportsCarousel({ setEvents }) {
           <div>
             <MdOutlineKeyboardArrowLeft size={30} />
           </div>
-          <div onClick={() => handleClick('tennis')}>
+          <div onClick={() => handleClick('Tennis')}>
             <MdSportsTennis size={30} />
           </div>
-          <div onClick={() => handleClick('football')}>
+          <div onClick={() => handleClick('Tootball')}>
             <MdSportsSoccer size={30} />
           </div>
-          <div onClick={() => handleClick('rugby')}>
+          <div onClick={() => handleClick('Rugby')}>
             <MdSportsRugby size={30} />
           </div>
-          <div onClick={() => handleClick('cricket')}>
+          <div onClick={() => handleClick('Cricket')}>
             <MdSportsCricket size={30} />
           </div>
           <div>
@@ -67,16 +67,16 @@ function SportsCarousel({ setEvents }) {
           <div>
             <MdOutlineKeyboardArrowLeft size={30} />
           </div>
-          <div onClick={() => handleClick('yoga')}>
+          <div onClick={() => handleClick('Yoga')}>
             <MdSelfImprovement size={30} />
           </div>
-          <div onClick={() => handleClick('snowboarding')}>
+          <div onClick={() => handleClick('Snowboarding')}>
             <MdSnowboarding size={30} />
           </div>
-          <div onClick={() => handleClick('running')}>
+          <div onClick={() => handleClick('Running')}>
             <MdOutlineDirectionsRun size={30} />
           </div>
-          <div onClick={() => handleClick('cycling')}>
+          <div onClick={() => handleClick('Cycling')}>
             <MdOutlineDirectionsBike size={30} />
           </div>
           <div>

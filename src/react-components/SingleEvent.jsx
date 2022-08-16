@@ -1,20 +1,21 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from 'react-router-dom';
 import {
   getDoc,
   doc,
   updateDoc,
   arrayUnion,
   arrayRemove,
-} from "firebase/firestore";
-import { db } from "../config/firebase";
-import { useEffect, useState } from "react";
-import SingleItemMap from "./SingleItemMap";
-import EventHostProfile from "./EventHostProfile";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import UserContext from "../react-contexts/UserContext";
-import { useContext } from "react";
-import { useAuth } from "../react-contexts/AuthenticationContext";
+} from 'firebase/firestore';
+import { db } from '../config/firebase';
+import { useEffect, useState } from 'react';
+import SingleItemMap from './SingleItemMap';
+import EventHostProfile from './EventHostProfile';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import UserContext from '../react-contexts/UserContext';
+import { useContext } from 'react';
+import { useAuth } from '../react-contexts/AuthenticationContext';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 function SingleEvent() {
   const { currentUser } = useAuth();
@@ -23,6 +24,7 @@ function SingleEvent() {
   const [singleEvent, setSingleEvent] = useState({});
   const [show, setShow] = useState(false);
   const [booked, setBooked] = useState(false);
+  const [onWishList, setOnWishList] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,10 +39,10 @@ function SingleEvent() {
         participants: [...filterParts],
       };
     });
-    const eventRef = doc(db, "events", eventId);
+    const eventRef = doc(db, 'events', eventId);
     updateDoc(eventRef, { participants: arrayRemove(user.username) });
 
-    const userRef = doc(db, "users", user.userId);
+    const userRef = doc(db, 'users', user.userId);
     updateDoc(userRef, { events: arrayRemove(eventId) });
   };
   const handleBook = () => {
@@ -51,27 +53,41 @@ function SingleEvent() {
       };
     });
 
-    const eventRef = doc(db, "events", eventId);
+    const eventRef = doc(db, 'events', eventId);
     updateDoc(eventRef, { participants: arrayUnion(user.username) });
 
-    const userRef = doc(db, "users", user.userId);
+    const userRef = doc(db, 'users', user.userId);
     updateDoc(userRef, { events: arrayUnion(eventId) });
 
     setShow(false);
     setBooked(true);
   };
 
+  const handleAddToWishList = () => {
+    const userRef = doc(db, 'users', user.userId);
+    updateDoc(userRef, { wishlist: arrayUnion(eventId) });
+    setOnWishList(true);
+  };
+
+  const handleRemoveFromWishList = () => {
+    const userRef = doc(db, 'users', user.userId);
+    updateDoc(userRef, { wishlist: arrayRemove(eventId) });
+    setOnWishList(false);
+  };
+
   useEffect(() => {
-    const docRef = doc(db, "events", eventId);
+    const docRef = doc(db, 'events', eventId);
     getDoc(docRef).then((data) => {
       setSingleEvent({ ...data.data(), eventId });
     });
+    if (user.wishlist) {
+      setOnWishList(user.wishlist.includes(eventId));
+    }
   }, [eventId, user]);
 
   useEffect(() => {
     if (currentUser) {
       if (user.events && user.events.includes(eventId)) {
-        console.log(user.events);
         setBooked(true);
       }
     } else {
@@ -112,6 +128,20 @@ function SingleEvent() {
       {Object.keys(singleEvent).length && (
         <>
           <h2>{singleEvent.title}</h2>
+          {onWishList ? (
+            <FaHeart
+              size={25}
+              style={{ color: 'red' }}
+              onClick={handleRemoveFromWishList}
+            />
+          ) : (
+            <FaRegHeart
+              size={25}
+              style={{ color: 'red' }}
+              onClick={handleAddToWishList}
+            />
+          )}
+
           <p>Sport: {singleEvent.type}</p>
           <p>Level: {singleEvent.level}</p>
           <p>

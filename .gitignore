@@ -2,6 +2,7 @@
 
 # seeding
 /src/seed/admin-key.json
+/src/seed/avatar.json
 
 # dependencies
 /node_modules
