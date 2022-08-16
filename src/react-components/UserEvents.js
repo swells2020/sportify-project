@@ -11,7 +11,6 @@ const UserEvents = ({ userInfo }) => {
   useEffect(() => {
     setIsLoading(true);
     getEvents(userInfo.username).then((data) => {
-      console.log(data);
       setUserEvents(data);
       setIsLoading(false);
     });

@@ -40,7 +40,7 @@ const Unauthorised = (props) => {
           <Route path="/home" element={<Home />} />
           <Route path="/events/:eventId" element={<SingleEvent />} />
           <Route path="/users/:userId" element={<UserProfile />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/*" element={<Home />} />
         </Routes>
         <NavBar setShow={setShow} />
       </Container>
