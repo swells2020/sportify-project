@@ -29,7 +29,7 @@ const Authorised = (props) => {
   return (
     <UserContext.Provider value={user}>
       <Container>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
