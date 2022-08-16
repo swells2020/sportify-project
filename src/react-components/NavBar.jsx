@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Navbar, NavDropdown } from "react-bootstrap";
 import {
   AiOutlineHome,
-  AiOutlineBell,
+  AiOutlineUnorderedList,
   AiOutlineUser,
   AiOutlineCalendar,
   AiOutlineHeart,
@@ -96,15 +96,15 @@ function NavBar({ setShow }) {
         }}
       >
         {currentUser ? (
-          <Nav.Link href="/alerts">
-            <AiOutlineBell size={30} />
+          <Nav.Link href="/feed">
+            <AiOutlineUnorderedList size={30} />
           </Nav.Link>
         ) : (
           <Nav.Link onClick={handleShow}>
-            <AiOutlineBell size={30} />
+            <AiOutlineUnorderedList size={30} />
           </Nav.Link>
         )}
-        Alerts
+        Feed
       </Nav.Item>
       <Nav.Item
         style={{ padding: "10px", textAlign: "center", fontSize: "12px" }}

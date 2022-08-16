@@ -1,6 +1,4 @@
-import {
-  useAuth,
-} from "../react-contexts/AuthenticationContext";
+import { useAuth } from "../react-contexts/AuthenticationContext";
 import { Image, Container, Button, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
@@ -13,13 +11,12 @@ const UserProfile = () => {
   const { userId } = useParams();
   const [userInfo, setUserInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  console.log(process.env);
 
   useEffect(() => {
     setIsLoading(true);
     const docRef = doc(db, "users", userId);
     getDoc(docRef).then((data) => {
-      setUserInfo({ ...data.data()});
+      setUserInfo({ ...data.data() });
       setIsLoading(false);
     });
   }, [userId]);
@@ -39,9 +36,17 @@ const UserProfile = () => {
             ></Image>
           </Container>
           <Container className="mt-3" style={{ textAlign: "center" }}>
-            {userInfo.firstName && userInfo.lastName ? <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2> : <></>}
+            {userInfo.firstName && userInfo.lastName ? (
+              <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2>
+            ) : (
+              <></>
+            )}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
-            {currentUser.uid === userInfo.uid ? <EditProfile userInfo={userInfo} /> : <></>}
+            {currentUser.uid === userInfo.uid ? (
+              <EditProfile userInfo={userInfo} />
+            ) : (
+              <></>
+            )}
             {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
             {currentUser.uid === userInfo.uid ? (
               <></>

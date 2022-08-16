@@ -9,6 +9,7 @@ import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
 import SingleEvent from "../react-components/SingleEvent";
 import NavBar from "../react-components/NavBar";
+import PageNotFound from "../react-components/PageNotFound";
 
 const Unauthorised = (props) => {
   const [show, setShow] = useState(false);
@@ -40,6 +41,7 @@ const Unauthorised = (props) => {
           <Route path="/login" element={<Login />} />
           <Route path="/passwordreset" element={<PasswordReset />} />
           <Route path="/events/:eventId" element={<SingleEvent />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <NavBar setShow={setShow} />
       </Container>
