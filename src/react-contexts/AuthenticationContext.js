@@ -48,7 +48,7 @@ export function AuthenticationContextProvider({ children }) {
           username: username,
           firstName: firstName,
           lastName: lastName,
-          location:location,
+          location: location,
           email: email,
           uid: user.uid,
           sports: [],
@@ -58,7 +58,7 @@ export function AuthenticationContextProvider({ children }) {
           events: [],
           wishlist: [],
           hostRating: [],
-          photoURL: process.env.REACT_APP_DEFAULT_PROFILE_PICTURE
+          photoURL: process.env.REACT_APP_DEFAULT_PROFILE_PICTURE,
         };
         user = data;
         return setDoc(documentRef, data);
