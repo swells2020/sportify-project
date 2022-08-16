@@ -1,6 +1,6 @@
-import Carousel from "react-bootstrap/Carousel";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Carousel from 'react-bootstrap/Carousel';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function LocationsCarousel({ events, selectedLocation }) {
   const [index, setIndex] = useState(0);
@@ -18,7 +18,7 @@ function LocationsCarousel({ events, selectedLocation }) {
   }, [selectedLocation]);
 
   return (
-    <>
+    <div className="events-carousel-container">
       <Carousel interval={null} activeIndex={index}>
         {events.map((event) => {
           return (
@@ -27,9 +27,9 @@ function LocationsCarousel({ events, selectedLocation }) {
               key={event.id}
               style={{
                 background: `linear-gradient(rgba(90,90,90,0.5), rgba(90,90,90,0.5)), url(${event.imageURL})`,
-                height: "200px",
-                backgroundSize: "cover",
-                color: "#f2f4f3",
+                height: '200px',
+                backgroundSize: 'cover',
+                color: '#f2f4f3',
               }}
             >
               <h3>{event.title}</h3>
@@ -41,7 +41,7 @@ function LocationsCarousel({ events, selectedLocation }) {
           );
         })}
       </Carousel>
-    </>
+    </div>
   );
 }
 

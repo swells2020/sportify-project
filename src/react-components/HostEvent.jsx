@@ -1,27 +1,27 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
-import UserContext from "../react-contexts/UserContext";
-import { useContext } from "react";
-import Geocode from "react-geocode";
-import { Timestamp } from "../config/firebase";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
+import UserContext from '../react-contexts/UserContext';
+import { useContext } from 'react';
+import Geocode from 'react-geocode';
+import { Timestamp } from '../config/firebase';
 
 function HostEvent() {
   const [show, setShow] = useState(false);
   const user = useContext(UserContext);
   Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAPS_API_KEY);
   const [formInput, setFormInput] = useState({
-    title: "",
-    description: "",
-    capacity: "",
-    date: "",
-    level: "",
-    location: "",
-    tags: "",
-    type: "",
+    title: '',
+    description: '',
+    capacity: '',
+    date: '',
+    level: '',
+    location: '',
+    tags: '',
+    type: '',
     geolocation: {},
   });
   const handleClose = () => setShow(false);
@@ -34,7 +34,7 @@ function HostEvent() {
         return { geolocation: { lat, lng } };
       })
       .then((geolocation) => {
-        addDoc(collection(db, "events"), {
+        addDoc(collection(db, 'events'), {
           ...formInput,
           date: Timestamp.fromDate(new Date(formInput.date)),
           participants: [],
@@ -179,7 +179,7 @@ function HostEvent() {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Level:</Form.Label>
+              <Form.Label>Sport:</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 value={formInput.type}
@@ -191,12 +191,12 @@ function HostEvent() {
                 required
               >
                 <option>Open this select menu...</option>
-                <option value="tennis">Tennis</option>
-                <option value="football">Football</option>
-                <option value="rugby">Rugby</option>
-                <option value="yoga">Yoga</option>
-                <option value="running">Running</option>
-                <option value="cycling">Cycling</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Football">Football</option>
+                <option value="Rugby">Rugby</option>
+                <option value="Yoga">Yoga</option>
+                <option value="Running">Running</option>
+                <option value="Cycling">Cycling</option>
               </Form.Select>
             </Form.Group>
           </Form>
@@ -209,7 +209,7 @@ function HostEvent() {
             Post Event
           </Button>
         </Modal.Footer>
-      </Modal>{" "}
+      </Modal>{' '}
     </>
   );
 }
