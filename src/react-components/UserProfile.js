@@ -15,15 +15,19 @@ import {
   updateDoc,
   getDocs,
   collection,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import EditProfile from "./EditProfile";
 import UserEvents from "./UserEvents";
 import UserTiles from "./UserTiles";
+import UserContext from "../react-contexts/UserContext";
 
 const UserProfile = () => {
   const { currentUser } = useAuth();
+  const user = useContext(UserContext);
   const { userId } = useParams();
   const [userInfo, setUserInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -36,10 +40,17 @@ const UserProfile = () => {
     if (!data.followers.includes(currentUser.uid)) {
       data.followers.push(currentUser.uid);
       setUserInfo(data);
-      updateDoc(docRef, data).then((data) => {
+      updateDoc(docRef, data).then(() => {
         setIsLoading(false);
       });
     }
+    if (!user.following.includes(data.username)) {
+      const docRef = doc(db, "users", currentUser.uid);
+      updateDoc(docRef, { following: arrayUnion(data.username) }).then(() => {
+        setIsLoading(false);
+      });
+    }
+
     setIsLoading(false);
   }
 
@@ -54,6 +65,12 @@ const UserProfile = () => {
       data.followers.splice(followerIndex, 1);
       setUserInfo(data);
       updateDoc(docRef, data).then((data) => {
+        setIsLoading(false);
+      });
+    }
+    if (user.following.includes(data.username)) {
+      const docRef = doc(db, "users", currentUser.uid);
+      updateDoc(docRef, { following: arrayRemove(data.username) }).then(() => {
         setIsLoading(false);
       });
     }
@@ -75,15 +92,15 @@ const UserProfile = () => {
   return (
     <>
       {isLoading ? (
-
-     <Container className="text-center" style={{minHeight: "1000px"}}>
-        <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"
-        }}>
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-
-      </Container>
-
+        <Container className="text-center" style={{ minHeight: "1000px" }}>
+          <Spinner
+            animation="border"
+            role="status"
+            style={{ marginTop: "220px", width: "100px", height: "100px" }}
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </Container>
       ) : (
         <>
           {" "}
@@ -108,7 +125,6 @@ const UserProfile = () => {
               <p>{userInfo.followers.length} Followers</p>
             )}
             {userAuth === userInfo.uid ? (
-
               <EditProfile userInfo={userInfo} />
             ) : (
               <></>
@@ -117,7 +133,7 @@ const UserProfile = () => {
 
             <Container className="p-0">
               <Row>
-                {(currentUser && currentUser.uid != userInfo.uid) && (
+                {currentUser && currentUser.uid != userInfo.uid && (
                   <Col>
                     {!userInfo.followers.includes(currentUser.uid) ? (
                       <Button
