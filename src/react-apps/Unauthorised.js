@@ -9,6 +9,7 @@ import Login from "../react-components/LogIn";
 import PasswordReset from "../react-components/PasswordReset";
 import SingleEvent from "../react-components/SingleEvent";
 import NavBar from "../react-components/NavBar";
+import PageNotFound from "../react-components/PageNotFound";
 import UserProfile from "../react-components/UserProfile";
 
 const Unauthorised = (props) => {
@@ -39,6 +40,7 @@ const Unauthorised = (props) => {
           <Route path="/home" element={<Home />} />
           <Route path="/events/:eventId" element={<SingleEvent />} />
           <Route path="/users/:userId" element={<UserProfile />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <NavBar setShow={setShow} />
       </Container>

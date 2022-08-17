@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { db } from '../config/firebase';
-import { Link } from 'react-router-dom';
-import { getDocs, doc, query, collection, where } from 'firebase/firestore';
+import { useEffect, useState } from "react";
+import { db } from "../config/firebase";
+import { Link } from "react-router-dom";
+import { getDocs, doc, query, collection, where } from "firebase/firestore";
 
 function EventHostProfile({ singleEvent }) {
   const [userHost, setUserHost] = useState({});
@@ -9,21 +9,22 @@ function EventHostProfile({ singleEvent }) {
   useEffect(() => {
     if (singleEvent.hostUsername) {
       const q = query(
-        collection(db, 'users'),
-        where('username', '==', singleEvent.hostUsername)
+        collection(db, "users"),
+        where("username", "==", singleEvent.hostUsername)
       );
       getDocs(q).then((data) => {
         data.forEach((user) => {
           setUserHost({ ...user.data(), userId: user.id });
           const userData = user.data();
-          let total = 0;
-
-          userData.rating.forEach((rating) => {
-            total += +rating.value;
-          });
-          const rating = total / userData.rating.length;
-          const roundedRating = rating.toFixed(2);
-          setHostRating(roundedRating);
+          if (userData.hostRating.length) {
+            let total = 0;
+            userData.hostRating.forEach((rating) => {
+              total += +rating.value;
+            });
+            const rating = total / userData.hostRating.length;
+            const roundedRating = rating.toFixed(2);
+            setHostRating(roundedRating);
+          }
         });
       });
     }

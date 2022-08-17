@@ -18,7 +18,7 @@ const users = [
     lastName: "Simpson",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1956, 4, 12)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Football", "Cricket"],
     friends: [],
     following: [],
@@ -27,7 +27,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 2,
@@ -37,7 +37,7 @@ const users = [
     lastName: "Simpson",
     gender: "Female",
     DOB: Timestamp.fromDate(new Date(1959, 0, 1)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Rugby", "Cycling"],
     friends: [],
     following: [],
@@ -46,7 +46,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 3,
@@ -56,7 +56,7 @@ const users = [
     lastName: "Simpson",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1985, 3, 1)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Snowboarding", "Cycling"],
     friends: [],
     following: [],
@@ -65,7 +65,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 4,
@@ -75,7 +75,7 @@ const users = [
     lastName: "Simpson",
     gender: "Female",
     DOB: Timestamp.fromDate(new Date(1987, 4, 9)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Yoga"],
     friends: [],
     following: [],
@@ -84,7 +84,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 5,
@@ -94,7 +94,7 @@ const users = [
     lastName: "Simpson",
     gender: "Female",
     DOB: Timestamp.fromDate(new Date(1989, 0, 14)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Running", "Cycling"],
     friends: [],
     following: [],
@@ -103,7 +103,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 6,
@@ -113,7 +113,7 @@ const users = [
     lastName: "Nahasapeemapetilon",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1957, 10, 10)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Rugby", "Cycling", "Yoga"],
     friends: [],
     following: [],
@@ -122,7 +122,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 7,
@@ -132,7 +132,7 @@ const users = [
     lastName: "Flanders",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1935, 4, 11)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Cycling"],
     friends: [],
     following: [],
@@ -141,7 +141,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 8,
@@ -151,7 +151,7 @@ const users = [
     lastName: "Simpson",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1902, 11, 25)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Rugby", "Cycling"],
     friends: [],
     following: [],
@@ -160,7 +160,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 9,
@@ -170,7 +170,7 @@ const users = [
     lastName: "Burns",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1886, 8, 15)),
-    location: "Springfield",
+    location: "manchester",
     sports: ["Rugby"],
     friends: [],
     following: [],
@@ -179,7 +179,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
   {
     testuid: 10,
@@ -189,7 +189,7 @@ const users = [
     lastName: "Smithers",
     gender: "Male",
     DOB: Timestamp.fromDate(new Date(1954, 11, 25)),
-    location: "Springfield",
+    location: "manchester",
     sports: [
       "Rugby",
       "Cycling",
@@ -207,7 +207,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL
+    photoURL: avatar.photoURL,
   },
 ];
 
@@ -499,7 +499,7 @@ const seed = () => {
                 events: user.events,
                 wishlist: user.wishlist,
                 hostRating: user.hostRating,
-                photoURL: user.photoURL
+                photoURL: user.photoURL,
               })
               .then(() => {
                 console.log(

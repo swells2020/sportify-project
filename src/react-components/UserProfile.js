@@ -22,7 +22,6 @@ const UserProfile = () => {
       if(currentUser) {
         setUserAuth(currentUser);
       }
-      
       setIsLoading(false);
     });
   }, [userId]);
@@ -53,12 +52,13 @@ const UserProfile = () => {
             )}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
             <p>{userInfo.followers.length} Followers</p>
+
             {userAuth.uid === userInfo.uid ? (
+
               <EditProfile userInfo={userInfo} />
             ) : (
               <></>
             )}
-
             {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
             {userAuth.uid === userInfo.uid ? (
               <></>
