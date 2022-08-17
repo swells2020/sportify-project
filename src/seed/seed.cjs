@@ -225,7 +225,7 @@ const events = [
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
     geolocation: { lat: 53.4808, lng: -2.2426 },
-    photoURL: avatar.yoga
+    photoURL: avatar.yoga,
   },
   {
     title: "Yoga with Apu",
@@ -240,7 +240,7 @@ const events = [
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
     geolocation: { lat: 53.4808, lng: -2.2426 },
-    photoURL: avatar.yoga
+    photoURL: avatar.yoga,
   },
   {
     title: "Yoga with Apu",
@@ -255,7 +255,7 @@ const events = [
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
     geolocation: { lat: 53.4808, lng: -2.2426 },
-    photoURL: avatar.yoga
+    photoURL: avatar.yoga,
   },
   {
     title: "Yoga with Apu",
@@ -270,7 +270,7 @@ const events = [
     hostUsername: "theDoc",
     tags: ["#yoga", "#wellness", "#selfcare"],
     geolocation: { lat: 53.4808, lng: -2.2426 },
-    photoURL: avatar.yoga
+    photoURL: avatar.yoga,
   },
   {
     title: "Derby Velodrome Splits",
@@ -284,7 +284,7 @@ const events = [
     hostUsername: "Bartman",
     tags: ["#timetrials", "#twowheeledfun", "#britishcycling"],
     geolocation: { lat: 53.4889, lng: -2.4338 },
-    photoURL: avatar.cycling
+    photoURL: avatar.cycling,
   },
   {
     title: "Bank Holiday Sunday T20 Blast",
@@ -306,7 +306,7 @@ const events = [
     hostUsername: "HomerJ1956",
     tags: ["#owzat"],
     geolocation: { lat: 53.4738, lng: -2.4438 },
-    photoURL: avatar.cricket
+    photoURL: avatar.cricket,
   },
   {
     title: "Pro Tennis Ladder - Newcastle Tennis Club",
@@ -321,14 +321,14 @@ const events = [
     hostUsername: "ChucklesWJS",
     tags: ["#wimbledonherewecome"],
     geolocation: { lat: 53.5303, lng: -2.3853 },
-    photoURL: avatar.tennis
+    photoURL: avatar.tennis,
   },
   {
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 6, 09, 00)),
     location: "Hassop Station",
     type: "Yoga",
-    capacity: Number.POSITIVE_INFINITY,
+    capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
     level: "Beginner",
@@ -336,14 +336,14 @@ const events = [
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
     geolocation: { lat: 53.3492, lng: -2.2495 },
-    photoURL: avatar.yoga
+    photoURL: avatar.running,
   },
   {
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 13, 09, 00)),
     location: "Hassop Station",
     type: "Yoga",
-    capacity: Number.POSITIVE_INFINITY,
+    capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
     level: "Beginner",
@@ -351,14 +351,14 @@ const events = [
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
     geolocation: { lat: 53.5939, lng: -2.4305 },
-    photoURL: avatar.yoga
+    photoURL: avatar.running,
   },
   {
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 20, 09, 00)),
     location: "Hassop Station",
     type: "Yoga",
-    capacity: Number.POSITIVE_INFINITY,
+    capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
     level: "Beginner",
@@ -366,14 +366,14 @@ const events = [
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
     geolocation: { lat: 53.3959, lng: -2.5302 },
-    photoURL: avatar.yoga
+    photoURL: avatar.running,
   },
   {
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 27, 09, 00)),
     location: "Hassop Station",
     type: "Yoga",
-    capacity: Number.POSITIVE_INFINITY,
+    capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
     level: "Beginner",
@@ -388,7 +388,7 @@ const events = [
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
     geolocation: { lat: 53.5495, lng: -2.543 },
-    photoURL: avatar.yoga
+    photoURL: avatar.yoga,
   },
   {
     title: "Bank Holiday Snowboarding at Tamworth",
@@ -403,7 +403,7 @@ const events = [
     hostUsername: "Bartman",
     tags: ["#cooldownthissummer"],
     geolocation: { lat: 53.8392, lng: -2.7929 },
-    photoURL: avatar.snowBoarding
+    photoURL: avatar.snowBoarding,
   },
   {
     title: "LGBT+ Charity 5-a-Side",
@@ -418,7 +418,7 @@ const events = [
     hostUsername: "theDoc",
     tags: ["#inclusivefootball", "LGBT+"],
     geolocation: { lat: 53.3299, lng: -2.5553 },
-    photoURL: avatar.football
+    photoURL: avatar.football,
   },
   {
     title: "Women's Outdoor Goat Yoga",
@@ -433,7 +433,7 @@ const events = [
     hostUsername: "BlueSteel",
     tags: ["#yoga", "#wellness", "#selfcare"],
     geolocation: { lat: 53.3495, lng: -2.3923 },
-    photoURL: avatar.yoga
+    photoURL: avatar.yoga,
   },
 ];
 
@@ -540,7 +540,7 @@ const seed = () => {
             hostUsername: event.hostUsername,
             tags: event.tags,
             geolocation: event.geolocation,
-            photoURL: event.photoURL
+            photoURL: event.photoURL,
           })
           .then(() => {
             console.log(`Successfully added ${event.title} to firestore`);

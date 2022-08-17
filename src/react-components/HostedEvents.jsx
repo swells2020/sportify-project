@@ -101,7 +101,10 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
                 </Accordion.Body>
                 <Accordion.Body>
                   {event.date.seconds > currDate && event.geolocation.lat && (
-                    <Button variant="primary" onClick={() => handleShow(event)}>
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => handleShow(event)}
+                    >
                       Delete Event
                     </Button>
                   )}

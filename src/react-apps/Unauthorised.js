@@ -10,6 +10,7 @@ import SingleEvent from "../react-components/SingleEvent";
 import NavBar from "../react-components/NavBar";
 import PageNotFound from "../react-components/PageNotFound";
 import UserProfile from "../react-components/UserProfile";
+import Footer from "../react-components/Footer";
 
 const Unauthorised = (props) => {
   const [show, setShow] = useState(false);
@@ -41,6 +42,7 @@ const Unauthorised = (props) => {
           <Route path="/users/:userId" element={<UserProfile />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Footer />
         <NavBar setShow={setShow} />
       </Container>
     </div>

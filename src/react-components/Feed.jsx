@@ -43,7 +43,12 @@ function Feed() {
 
   return (
     <>
-      <h2>Your feed</h2>
+      <div
+        style={{
+          height: "10px",
+          marginTop: "5px",
+        }}
+      ></div>
       {followerEvents && <FeedCards followerEvents={followerEvents} />}
     </>
   );
