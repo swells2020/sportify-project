@@ -6,6 +6,9 @@ function SingleItemMap({ singleEvent }) {
   const mapStyles = {
     height: "50vh",
     width: "100%",
+    borderRadius: "20px",
+    marginRight: "10px",
+    marginBottom: "10px",
   };
   useEffect(() => {
     if (!Object.keys(singleEvent).length) {
