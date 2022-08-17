@@ -8,7 +8,15 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 const AuthenticationContext = createContext();
 const storage = getStorage();
@@ -24,14 +32,16 @@ export async function uploadAvatar(newAvatar, currentUser) {
   return photoURL;
 }
 
-export async function getEvents (username) {
-  const q = query(collection(db, "events"), where("hostUsername", "==", username))
+export async function getEvents(username) {
+  const q = query(
+    collection(db, "events"),
+    where("hostUsername", "==", username)
+  );
   const querySnapshot = await getDocs(q);
-  const userEvents = []
+  const userEvents = [];
   querySnapshot.forEach((doc) => {
-
       userEvents.push({...doc.data(), eventId: doc.id});
-  })
+  });
   return userEvents;
 }
 
