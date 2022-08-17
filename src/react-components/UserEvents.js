@@ -25,8 +25,9 @@ const UserEvents = ({ userInfo }) => {
       ) : (
         <>
           {userEvents.map((event) => {
+            console.log(event)
             return (
-              <Card className="mb-3 text-start">
+              <Card key={event.uid} className="mb-3 text-start">
                 <Image
                   rounded
                   className="m-2"

@@ -112,42 +112,38 @@ const UserProfile = () => {
               <></>
             )}
             {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
-            {currentUser ? (
-              <></>
-            ) : (
-              <Container className="p-0">
-                <Row>
-                  {currentUser && (
-                    <Col>
-                      {!userInfo.followers.includes(currentUser.uid) ? (
-                        <Button
-                          className="m-1"
-                          variant="outline-primary"
-                          onClick={handleFollow}
-                        >
-                          Follow
-                        </Button>
-                      ) : (
-                        <Button
-                          className="m-1"
-                          variant="outline-primary"
-                          onClick={handleUnfollow}
-                        >
-                          Unfollow
-                        </Button>
-                      )}
-                    </Col>
-                  )}
-                </Row>
-
-                {userInfo.followers.length > 0 && (
-                  <>
-                    <h2>Followers</h2>
-                    <UserTiles userArray={userInfo.followers}></UserTiles>
-                  </>
+            <Container className="p-0">
+              <Row>
+                {(currentUser && currentUser.uid != userInfo.uid) && (
+                  <Col>
+                    {!userInfo.followers.includes(currentUser.uid) ? (
+                      <Button
+                        className="m-1"
+                        variant="outline-primary"
+                        onClick={handleFollow}
+                      >
+                        Follow
+                      </Button>
+                    ) : (
+                      <Button
+                        className="m-1"
+                        variant="outline-primary"
+                        onClick={handleUnfollow}
+                      >
+                        Unfollow
+                      </Button>
+                    )}
+                  </Col>
                 )}
-              </Container>
-            )}
+              </Row>
+
+              {userInfo.followers.length > 0 && (
+                <>
+                  <h2>Followers</h2>
+                  <UserTiles userArray={userInfo.followers}></UserTiles>
+                </>
+              )}
+            </Container>
             <UserEvents userInfo={userInfo} />
           </Container>
         </>

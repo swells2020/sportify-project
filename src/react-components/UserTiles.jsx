@@ -32,16 +32,14 @@ const UserTiles = ({ userArray }) => {
       <Row>
         {cardDetails.map((user) => {
           return (
-            <>
-              <Card>
-                <Image
-                  style={{ width: "150px", height: "150px" }}
-                  src={user.photoURL}
-                  roundedCircle="true"
-                ></Image>
-                {user.username}
-              </Card>
-            </>
+            <Card key={user.uid}>
+              <Image
+                style={{ width: "150px", height: "150px" }}
+                src={user.photoURL}
+                roundedCircle="true"
+              ></Image>
+              {user.username}
+            </Card>
           );
         })}
       </Row>
