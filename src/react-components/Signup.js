@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Alert, Button, Form, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Alert, Button, Form, Modal, CloseButton} from "react-bootstrap";
 import { useAuth } from "../react-contexts/AuthenticationContext";
 import "./signup.css";
 
-const SignUp = ({ setLoginComponent }) => {
+const SignUp = ({ setLoginComponent, setShow }) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
   const firstNameRef = useRef();
@@ -14,8 +13,8 @@ const SignUp = ({ setLoginComponent }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const navigate = useNavigate();
   const { signUp } = useAuth();
+  const handleClose = () => setShow(false);
 
   function switchComponent() {
     setLoginComponent("Log In");
@@ -48,6 +47,7 @@ const SignUp = ({ setLoginComponent }) => {
   return (
     <>
       <header className="loginHeader">
+      <CloseButton style={{marginLeft: "92%"}} onClick={handleClose} />
         <h2 className="text-center mb-4">Sign Up</h2>
 
         <div className="loginHeaderDiv">
@@ -60,7 +60,7 @@ const SignUp = ({ setLoginComponent }) => {
                 padding: "10px",
               }}
             >
-              Log In
+              Log In 
             </button>
           </div>
           <div className="loginHeaderButtons">

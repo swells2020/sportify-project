@@ -5,18 +5,6 @@ import { getEvents } from "../react-contexts/AuthenticationContext";
 import {
   BsFillGeoAltFill,
 } from "react-icons/bs";
-// import {
-//   MdSportsSoccer,
-//   MdSportsTennis,
-//   MdSportsRugby,
-//   MdSportsCricket,
-//   MdSelfImprovement,
-//   MdSnowboarding,
-//   MdOutlineDirectionsRun,
-//   MdOutlineDirectionsBike,
-//   MdOutlineKeyboardArrowLeft,
-//   MdOutlineKeyboardArrowRight,
-// } from 'react-icons/md';
 
 const UserEvents = ({ userInfo }) => {
   const { userId } = useParams();

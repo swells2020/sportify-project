@@ -9,7 +9,7 @@ import {
   AiOutlineHeart,
 } from "react-icons/ai";
 import { useAuth } from "../react-contexts/AuthenticationContext";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./navbar.css";
 
 function NavBar({ setShow }) {
@@ -17,11 +17,14 @@ function NavBar({ setShow }) {
   const { currentUser } = useAuth();
   const handleShow = () => setShow(true);
   const { logOut } = useAuth();
+  const navigate = useNavigate();
 
   async function handleSignOut() {
     setError("");
     try {
       await logOut();
+      navigate("/home")
+      
     } catch {
       setError("Failed to sign out, please try again");
     }
