@@ -1,12 +1,11 @@
-import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { Button, Form, Modal, Spinner } from 'react-bootstrap';
 import { collection, addDoc } from 'firebase/firestore';
-import { useState } from "react";
-import { db } from "../config/firebase";
-import UserContext from "../react-contexts/UserContext";
-import { useContext } from "react";
-import Geocode from "react-geocode";
-import { Timestamp } from "../config/firebase";
-
+import { useState } from 'react';
+import { db } from '../config/firebase';
+import UserContext from '../react-contexts/UserContext';
+import { useContext } from 'react';
+import Geocode from 'react-geocode';
+import { Timestamp } from '../config/firebase';
 
 function HostEvent({ setHostedEvents }) {
   const [show, setShow] = useState(false);
@@ -14,18 +13,41 @@ function HostEvent({ setHostedEvents }) {
   const user = useContext(UserContext);
   Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAPS_API_KEY);
   const [formInput, setFormInput] = useState({
-    title: "",
-    description: "",
-    capacity: "",
-    date: "",
-    level: "",
-    location: "",
-    tags: "",
-    type: "",
+    title: '',
+    description: '',
+    capacity: '',
+    date: '',
+    level: '',
+    location: '',
+    tags: '',
+    type: '',
     geolocation: {},
   });
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const getSportURL = (type) => {
+    switch (type) {
+      case 'Cricket':
+        return process.env.REACT_APP_DEFAULT_CRICKET_PICTURE;
+      case 'Cycling':
+        return process.env.REACT_APP_DEFAULT_CYCLING_PICTURE;
+      case 'Football':
+        return process.env.REACT_APP_DEFAULT_FOOTBALL_PICTURE;
+      case 'Rugby':
+        return process.env.REACT_APP_DEFAULT_RUGBY_PICTURE;
+      case 'Running':
+        return process.env.REACT_APP_DEFAULT_RUNNING_PICTURE;
+      case 'Snowboarding':
+        return process.env.REACT_APP_DEFAULT_SNOW_BOARDING_PICTURE;
+      case 'Tennis':
+        return process.env.REACT_APP_DEFAULT_TENNIS_PICTURE;
+      case 'Yoga':
+        return process.env.REACT_APP_DEFAULT_YOGA_PICTURE;
+      default:
+        return 'hello';
+    }
+  };
 
   const handleSubmit = () => {
     setPostIsLoading(true);
@@ -44,7 +66,8 @@ function HostEvent({ setHostedEvents }) {
           },
           ...prev,
         ]);
-        addDoc(collection(db, "events"), {
+
+        addDoc(collection(db, 'events'), {
           ...formInput,
           date: Timestamp.fromDate(new Date(formInput.date)),
           participants: [],
@@ -53,13 +76,13 @@ function HostEvent({ setHostedEvents }) {
             lng: geolocation.geolocation.lng,
           },
           hostUsername: user.username,
+          photoURL: getSportURL(formInput.type),
         });
       })
       .then(() => {
         setPostIsLoading(false);
         handleClose();
-      })
-
+      });
   };
 
   return (
@@ -67,7 +90,7 @@ function HostEvent({ setHostedEvents }) {
       <Button
         variant="outline-primary"
         onClick={handleShow}
-        style={{ marginTop: "10px", width: "100%" }}
+        style={{ marginTop: '10px', width: '100%' }}
       >
         Host an event
       </Button>
@@ -216,6 +239,7 @@ function HostEvent({ setHostedEvents }) {
                 <option value="Yoga">Yoga</option>
                 <option value="Running">Running</option>
                 <option value="Cycling">Cycling</option>
+                <option value="Snowboarding">Snowboarding</option>
               </Form.Select>
             </Form.Group>
           </Form>
@@ -225,17 +249,22 @@ function HostEvent({ setHostedEvents }) {
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Post Event{postIsLoading ?<Spinner
-          className="ms-2"
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        /> : <></>}
+            Post Event
+            {postIsLoading ? (
+              <Spinner
+                className="ms-2"
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : (
+              <></>
+            )}
           </Button>
         </Modal.Footer>
-      </Modal>{" "}
+      </Modal>{' '}
     </>
   );
 }
