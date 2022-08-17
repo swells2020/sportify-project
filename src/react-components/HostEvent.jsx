@@ -1,40 +1,50 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../config/firebase';
-import UserContext from '../react-contexts/UserContext';
-import { useContext } from 'react';
-import Geocode from 'react-geocode';
-import { Timestamp } from '../config/firebase';
+import { useState } from "react";
+import { db } from "../config/firebase";
+import UserContext from "../react-contexts/UserContext";
+import { useContext } from "react";
+import Geocode from "react-geocode";
+import { Timestamp } from "../config/firebase";
 
-function HostEvent() {
+
+function HostEvent({ setHostedEvents }) {
   const [show, setShow] = useState(false);
+  const [postIsLoading, setPostIsLoading] = useState(false);
   const user = useContext(UserContext);
   Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAPS_API_KEY);
   const [formInput, setFormInput] = useState({
-    title: '',
-    description: '',
-    capacity: '',
-    date: '',
-    level: '',
-    location: '',
-    tags: '',
-    type: '',
+    title: "",
+    description: "",
+    capacity: "",
+    date: "",
+    level: "",
+    location: "",
+    tags: "",
+    type: "",
     geolocation: {},
   });
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = () => {
+    setPostIsLoading(true);
     Geocode.fromAddress(formInput.location)
       .then((response) => {
         const { lat, lng } = response.results[0].geometry.location;
         return { geolocation: { lat, lng } };
       })
       .then((geolocation) => {
-        addDoc(collection(db, 'events'), {
+        setHostedEvents((prev) => [
+          {
+            ...formInput,
+            date: Timestamp.fromDate(new Date(formInput.date)),
+            participants: [],
+            id: Date.now(),
+          },
+          ...prev,
+        ]);
+        addDoc(collection(db, "events"), {
           ...formInput,
           date: Timestamp.fromDate(new Date(formInput.date)),
           participants: [],
@@ -44,12 +54,21 @@ function HostEvent() {
           },
           hostUsername: user.username,
         });
-      });
+      })
+      .then(() => {
+        setPostIsLoading(false);
+        handleClose();
+      })
+
   };
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="outline-primary"
+        onClick={handleShow}
+        style={{ marginTop: "10px", width: "100%" }}
+      >
         Host an event
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -206,10 +225,17 @@ function HostEvent() {
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Post Event
+            Post Event{postIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}
           </Button>
         </Modal.Footer>
-      </Modal>{' '}
+      </Modal>{" "}
     </>
   );
 }

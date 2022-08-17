@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from "react";
 import {
   getDocs,
   doc,
@@ -8,21 +8,21 @@ import {
   orderBy,
   deleteDoc,
   updateDoc,
-  arrayContains,
   arrayRemove,
 } from 'firebase/firestore';
 import UserContext from '../react-contexts/UserContext';
 import { db } from '../config/firebase';
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Container, Button, Accordion, Modal, Spinner } from "react-bootstrap";
 
-function HostedEvents() {
+function HostedEvents({ hostedEvents, setHostedEvents }) {
   const user = useContext(UserContext);
-  const [hostedEvents, setHostedEvents] = useState([]);
   const currDate = ~~(+new Date() / 1000);
   const [show, setShow] = useState(false);
+
   const [selectedEvent, setSelectedEvent] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [deleteIsLoading, setDeleteIsLoading] = useState(false);
+
 
   const handleShow = (event) => {
     setSelectedEvent(event);
@@ -31,35 +31,35 @@ function HostedEvents() {
 
   const handleClose = () => setShow(false);
   const handleDelete = () => {
+    setDeleteIsLoading(true);
     setShow(false);
-    console.log('cancelling event');
-    // delete from events
-    deleteDoc(doc(db, 'events', selectedEvent.id));
-
-    // delete from all users events array
+    setHostedEvents((prev) =>
+      prev.filter((event) => event.id !== selectedEvent.id)
+    );
+    deleteDoc(doc(db, "events", selectedEvent.id));
     const q = query(
-      collection(db, 'users'),
-      where('events', 'array-contains', selectedEvent.id)
+      collection(db, "users"),
+      where("events", "array-contains", selectedEvent.id)
     );
 
     getDocs(q).then((userDocs) => {
       userDocs.forEach((user) => {
-        const userRef = doc(db, 'users', user.id);
+        const userRef = doc(db, "users", user.id);
         updateDoc(userRef, {
           events: arrayRemove(selectedEvent.id),
         });
       });
+      setDeleteIsLoading(false);
     });
-
-    // delete from all users wishlist
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (user.events) {
       const q = query(
-        collection(db, 'events'),
-        where('hostUsername', '==', user.username),
-        orderBy('date', 'desc')
+        collection(db, "events"),
+        where("hostUsername", "==", user.username),
+        orderBy("date", "desc")
       );
       getDocs(q).then((data) => {
         data.docs.forEach((hostedEvent) => {
@@ -68,6 +68,7 @@ function HostedEvents() {
             return [...prev, eventWithId];
           });
         });
+        setIsLoading(false);
       });
     }
   }, [user]);
@@ -88,25 +89,45 @@ function HostedEvents() {
         </Modal.Footer>
       </Modal>
       {hostedEvents && (
+        <>
+        {isLoading ? (
+       <Container className="text-center" style={{minHeight: "1000px"}}>
+          <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"
+          }}>
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+  
+        </Container>
+        ) : (
+          <>
         <Accordion defaultActiveKey="0">
           {hostedEvents.map((event) => {
             const date = new Date(event.date.seconds * 1000);
             return (
               <Accordion.Item eventKey={event.id} key={event.id}>
                 <Accordion.Header>
-                  {event.title} {date.toLocaleTimeString('en-UK')},{' '}
-                  {date.toLocaleDateString('en-UK')}
+                  {event.title} {date.toLocaleTimeString("en-UK")},{" "}
+                  {date.toLocaleDateString("en-UK")}
                 </Accordion.Header>
                 <Accordion.Body>{event.description} </Accordion.Body>
                 <Accordion.Body>Type: {event.type} </Accordion.Body>
                 <Accordion.Body>Level: {event.level} </Accordion.Body>
+                <Accordion.Body>Location: {event.location} </Accordion.Body>
                 <Accordion.Body>
-                  Participants: {event.participants.join(', ')}
+                  Participants: {event.participants.join(", ")}
                 </Accordion.Body>
                 <Accordion.Body>
-                  {event.date.seconds > currDate && (
-                    <Button variant="primary" onClick={() => handleShow(event)}>
-                      Delete Event
+
+                  {event.date.seconds > currDate && event.geolocation.lat && (
+                    <Button variant="outline-primary" onClick={() => handleShow(event)}>
+                      Delete Event{deleteIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}
                     </Button>
                   )}
                 </Accordion.Body>
@@ -114,6 +135,8 @@ function HostedEvents() {
             );
           })}
         </Accordion>
+        </>)}
+        </>
       )}
     </div>
   );

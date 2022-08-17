@@ -75,15 +75,15 @@ const UserProfile = () => {
   return (
     <>
       {isLoading ? (
-        <Container className="text-center">
-          <Spinner
-            animation="border"
-            role="status"
-            style={{ width: "150px", height: "150px" }}
-          >
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </Container>
+
+     <Container className="text-center" style={{minHeight: "1000px"}}>
+        <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"
+        }}>
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+
+      </Container>
+
       ) : (
         <>
           {" "}
@@ -101,17 +101,20 @@ const UserProfile = () => {
               <></>
             )}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
+
             {userInfo.followers.length == 1 ? (
               <p>{userInfo.followers.length} Follower</p>
             ) : (
               <p>{userInfo.followers.length} Followers</p>
             )}
             {userAuth === userInfo.uid ? (
+
               <EditProfile userInfo={userInfo} />
             ) : (
               <></>
             )}
             {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
+
             <Container className="p-0">
               <Row>
                 {(currentUser && currentUser.uid != userInfo.uid) && (
