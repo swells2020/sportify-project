@@ -52,14 +52,15 @@ const UserProfile = () => {
             )}
             <p style={{ fontWeight: "bold" }}>{`@${userInfo.username}`}</p>
             <p>{userInfo.followers.length} Followers</p>
-            {userAuth === userInfo.uid ? (
+
+            {userAuth.uid === userInfo.uid ? (
 
               <EditProfile userInfo={userInfo} />
             ) : (
               <></>
             )}
             {userInfo.bio ? <p>{userInfo.bio}</p> : <></>}
-            {userAuth === userInfo.uid ? (
+            {userAuth.uid === userInfo.uid ? (
               <></>
             ) : (
               <Container className="p-0">
