@@ -98,12 +98,21 @@ function SingleEvent() {
   if (!currentUser) {
     button = (
       <Link to="/login">
-        <Button>LogIn to book this event</Button>
+        <Button
+          variant="outline-primary"
+          style={{ marginBottom: "10px", width: "100%" }}
+        >
+          LogIn to book this event
+        </Button>
       </Link>
     );
   } else if (booked) {
     button = (
-      <Button variant="primary" onClick={handleCancel}>
+      <Button
+        variant="outline-primary"
+        style={{ marginBottom: "10px", width: "100%" }}
+        onClick={handleCancel}
+      >
         Cancel your booking
       </Button>
     );
@@ -112,13 +121,21 @@ function SingleEvent() {
     singleEvent.capacity === singleEvent.participants.length
   ) {
     button = (
-      <Button variant="primary" disabled>
+      <Button
+        variant="outline-primary"
+        style={{ marginBottom: "10px", width: "100%" }}
+        disabled
+      >
         Event is fully booked
       </Button>
     );
   } else
     button = (
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="outline-primary"
+        onClick={handleShow}
+        style={{ marginBottom: "10px", width: "100%" }}
+      >
         Book Event
       </Button>
     );
@@ -126,33 +143,60 @@ function SingleEvent() {
     <section className="singleMapContainer">
       {Object.keys(singleEvent).length && (
         <>
-          <h2>{singleEvent.title}</h2>
-          {user && (
-            <div>
-              {onWishList ? (
-                <FaHeart
-                  size={25}
-                  style={{ color: "red" }}
-                  onClick={handleRemoveFromWishList}
-                />
-              ) : (
-                <FaRegHeart
-                  size={25}
-                  style={{ color: "red" }}
-                  onClick={handleAddToWishList}
-                />
-              )}
-            </div>
-          )}
-          <p>Sport: {singleEvent.type}</p>
-          <p>Level: {singleEvent.level}</p>
-          <p>
-            Capacity: {singleEvent.participants.length}/{singleEvent.capacity}
-          </p>
-          <p>More Info: {singleEvent.description}</p>
-          <EventHostProfile singleEvent={singleEvent} />
-          <SingleItemMap singleEvent={singleEvent} />
+          <div
+            style={{
+              height: "10px",
+              marginTop: "5px",
+            }}
+          ></div>
+          <img
+            src={singleEvent.photoURL}
+            alt={singleEvent.title}
+            style={{ height: "100%", width: "100%", borderRadius: "20px" }}
+          />
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h2 style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+              {singleEvent.title}
+            </h2>
+            {user && (
+              <div>
+                {onWishList ? (
+                  <FaHeart
+                    size={25}
+                    style={{
+                      color: "red",
+                      marginTop: "15px",
+                      marginRight: "10px",
+                    }}
+                    onClick={handleRemoveFromWishList}
+                  />
+                ) : (
+                  <FaRegHeart
+                    size={25}
+                    style={{
+                      color: "red",
+                      marginTop: "15px",
+                      marginRight: "10px",
+                    }}
+                    onClick={handleAddToWishList}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <p style={{ padding: "2px" }}>Sport: {singleEvent.type}</p>
+            <p style={{ padding: "2px" }}>Level: {singleEvent.level}</p>
+
+            <p style={{ padding: "2px" }}>
+              Capacity: {singleEvent.participants.length}/{singleEvent.capacity}
+            </p>
+          </div>
+
           {button}
+          <p>{singleEvent.description}</p>
+          <SingleItemMap singleEvent={singleEvent} />
+          <EventHostProfile singleEvent={singleEvent} />
         </>
       )}
       <Modal show={show} onHide={handleClose}>

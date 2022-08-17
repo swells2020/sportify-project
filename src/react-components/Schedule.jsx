@@ -8,6 +8,7 @@ import ScheduleTabs from "./ScheduleTabs";
 function Schedule() {
   const user = useContext(UserContext);
   const [schedule, setSchedule] = useState([]);
+
   useEffect(() => {
     if (user.events) {
       const eventRequests = user.events.map((event) => {

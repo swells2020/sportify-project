@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 function SingleItemMap({ singleEvent }) {
   const [event, setEvent] = useState(false);
   const mapStyles = {
-    height: "50vh",
+    height: "25vh",
     width: "100%",
     borderRadius: "20px",
     marginRight: "10px",
     marginBottom: "10px",
+    marginTop: "10px",
   };
   useEffect(() => {
     if (!Object.keys(singleEvent).length) {

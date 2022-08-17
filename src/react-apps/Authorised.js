@@ -13,6 +13,7 @@ import Schedule from "../react-components/Schedule";
 import WishList from "../react-components/WishList";
 import PageNotFound from "../react-components/PageNotFound";
 import Feed from "../react-components/Feed";
+import Footer from "../react-components/Footer";
 
 const Authorised = (props) => {
   const { currentUser } = useAuth();
@@ -39,6 +40,7 @@ const Authorised = (props) => {
           <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Footer />
         <NavBar />
       </Container>
     </UserContext.Provider>

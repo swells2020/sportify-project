@@ -1,5 +1,6 @@
 import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 function ScheduleList({ schedule }) {
   const currDate = ~~(+new Date() / 1000);
@@ -24,9 +25,11 @@ function ScheduleList({ schedule }) {
               <Accordion.Body>
                 Participants: {event.participants.join(", ")}
               </Accordion.Body>
-              <Link to={`/events/${event.eventId}`}>
-                <Accordion.Body>View event page</Accordion.Body>
-              </Link>
+              <Accordion.Body>
+                <Link to={`/events/${event.eventId}`}>
+                  <Button variant="outline-primary">View event </Button>
+                </Link>
+              </Accordion.Body>
             </Accordion.Item>
           );
         })}
