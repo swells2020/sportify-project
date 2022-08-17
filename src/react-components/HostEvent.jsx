@@ -59,7 +59,7 @@ function HostEvent({ setHostedEvents }) {
         setPostIsLoading(false);
         handleClose();
       })
-      });
+
   };
 
   return (
