@@ -6,7 +6,6 @@ import { db } from "../config/firebase";
 import { useAuth } from "../react-contexts/AuthenticationContext";
 import UserContext from "../react-contexts/UserContext";
 import NavBar from "../react-components/NavBar";
-import Header from "../react-components/Header";
 import Home from "../react-components/Home";
 import SingleEvent from "../react-components/SingleEvent";
 import UserProfile from "../react-components/UserProfile";

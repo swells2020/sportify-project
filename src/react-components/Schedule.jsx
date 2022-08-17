@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
-import { getDoc, doc } from 'firebase/firestore';
-import { db } from '../config/firebase';
-import { useContext } from 'react';
-import UserContext from '../react-contexts/UserContext';
-import HostEvent from '../react-components/HostEvent';
-import ScheduleTabs from './ScheduleTabs';
+import { useEffect, useState } from "react";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useContext } from "react";
+import UserContext from "../react-contexts/UserContext";
+import ScheduleTabs from "./ScheduleTabs";
 
 function Schedule() {
   const user = useContext(UserContext);
@@ -12,7 +11,7 @@ function Schedule() {
   useEffect(() => {
     if (user.events) {
       const eventRequests = user.events.map((event) => {
-        const docRef = doc(db, 'events', event);
+        const docRef = doc(db, "events", event);
         return getDoc(docRef);
       });
       Promise.all(eventRequests)
@@ -36,7 +35,6 @@ function Schedule() {
   return (
     <>
       <ScheduleTabs schedule={schedule} />
-      <HostEvent />
     </>
   );
 }

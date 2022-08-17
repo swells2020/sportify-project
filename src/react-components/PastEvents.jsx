@@ -93,7 +93,7 @@ function PastEvents({ schedule }) {
                 <Accordion.Body>{event.description} </Accordion.Body>
                 <Accordion.Body>Type: {event.type} </Accordion.Body>
                 <Accordion.Body>Level: {event.level} </Accordion.Body>
-                <Accordion.Body>Level: {event.eventId} </Accordion.Body>
+                <Accordion.Body>Location: {event.location} </Accordion.Body>
                 <Accordion.Body>
                   Participants: {event.participants.join(", ")}
                 </Accordion.Body>
