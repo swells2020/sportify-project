@@ -29,10 +29,12 @@ const UserProfile = () => {
   return (
     <>
       {isLoading ? (
-        <Container className="text-center">
-        <Spinner animation="border" role="status" style={{ width: "150px", height: "150px" }}>
+     <Container className="text-center" style={{minHeight: "1000px"}}>
+        <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"
+        }}>
         <span className="visually-hidden">Loading...</span>
       </Spinner>
+
       </Container>
       ) : (
         <>

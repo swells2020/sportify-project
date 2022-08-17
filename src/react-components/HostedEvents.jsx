@@ -9,18 +9,20 @@ import {
   deleteDoc,
   updateDoc,
   arrayRemove,
-} from "firebase/firestore";
-import UserContext from "../react-contexts/UserContext";
-import { db } from "../config/firebase";
-import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+} from 'firebase/firestore';
+import UserContext from '../react-contexts/UserContext';
+import { db } from '../config/firebase';
+import { Container, Button, Accordion, Modal, Spinner } from "react-bootstrap";
 
 function HostedEvents({ hostedEvents, setHostedEvents }) {
   const user = useContext(UserContext);
   const currDate = ~~(+new Date() / 1000);
   const [show, setShow] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState("");
+
+  const [selectedEvent, setSelectedEvent] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [deleteIsLoading, setDeleteIsLoading] = useState(false);
+
 
   const handleShow = (event) => {
     setSelectedEvent(event);
@@ -29,6 +31,7 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
 
   const handleClose = () => setShow(false);
   const handleDelete = () => {
+    setDeleteIsLoading(true);
     setShow(false);
     setHostedEvents((prev) =>
       prev.filter((event) => event.id !== selectedEvent.id)
@@ -46,10 +49,12 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
           events: arrayRemove(selectedEvent.id),
         });
       });
+      setDeleteIsLoading(false);
     });
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (user.events) {
       const q = query(
         collection(db, "events"),
@@ -63,6 +68,7 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
             return [...prev, eventWithId];
           });
         });
+        setIsLoading(false);
       });
     }
   }, [user]);
@@ -83,6 +89,17 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
         </Modal.Footer>
       </Modal>
       {hostedEvents && (
+        <>
+        {isLoading ? (
+       <Container className="text-center" style={{minHeight: "1000px"}}>
+          <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"
+          }}>
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+  
+        </Container>
+        ) : (
+          <>
         <Accordion defaultActiveKey="0">
           {hostedEvents.map((event) => {
             const date = new Date(event.date.seconds * 1000);
@@ -100,12 +117,17 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
                   Participants: {event.participants.join(", ")}
                 </Accordion.Body>
                 <Accordion.Body>
+
                   {event.date.seconds > currDate && event.geolocation.lat && (
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => handleShow(event)}
-                    >
-                      Delete Event
+                    <Button variant="outline-primary" onClick={() => handleShow(event)}>
+                      Delete Event{deleteIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}
                     </Button>
                   )}
                 </Accordion.Body>
@@ -113,6 +135,8 @@ function HostedEvents({ hostedEvents, setHostedEvents }) {
             );
           })}
         </Accordion>
+        </>)}
+        </>
       )}
     </div>
   );

@@ -1,16 +1,16 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { collection, addDoc } from 'firebase/firestore';
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import UserContext from "../react-contexts/UserContext";
 import { useContext } from "react";
 import Geocode from "react-geocode";
 import { Timestamp } from "../config/firebase";
 
+
 function HostEvent({ setHostedEvents }) {
   const [show, setShow] = useState(false);
+  const [postIsLoading, setPostIsLoading] = useState(false);
   const user = useContext(UserContext);
   Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAPS_API_KEY);
   const [formInput, setFormInput] = useState({
@@ -28,6 +28,7 @@ function HostEvent({ setHostedEvents }) {
   const handleShow = () => setShow(true);
 
   const handleSubmit = () => {
+    setPostIsLoading(true);
     Geocode.fromAddress(formInput.location)
       .then((response) => {
         const { lat, lng } = response.results[0].geometry.location;
@@ -53,8 +54,12 @@ function HostEvent({ setHostedEvents }) {
           },
           hostUsername: user.username,
         });
+      })
+      .then(() => {
+        setPostIsLoading(false);
+        handleClose();
+      })
       });
-    setShow(false);
   };
 
   return (
@@ -220,7 +225,14 @@ function HostEvent({ setHostedEvents }) {
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Post Event
+            Post Event{postIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}
           </Button>
         </Modal.Footer>
       </Modal>{" "}
