@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Alert, Button, Form, Modal } from "react-bootstrap";
+import { Alert, Button, Form, Modal, CloseButton } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../react-contexts/AuthenticationContext";
-import PasswordReset from "./PasswordReset";
 
-const Login = ({ setLoginComponent }) => {
+const Login = ({ setLoginComponent, setShow }) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState()
 
@@ -13,6 +12,7 @@ const Login = ({ setLoginComponent }) => {
   const navigate = useNavigate();
   const { logIn } = useAuth();
 
+  const handleClose = () => setShow(false);
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -34,7 +34,7 @@ const Login = ({ setLoginComponent }) => {
   return (
     <>
       <header className="loginHeader">
-        <h2 className="text-center mb-4">Log In</h2>
+      <CloseButton style={{marginLeft: "92%"}} onClick={handleClose} /> <h2 className="text-center mb-4">Log In </h2>
 
         <div className="loginHeaderDiv">
           <div className="loginHeaderButtons">
