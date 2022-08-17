@@ -28,7 +28,7 @@ function FeedCards({ followerEvents }) {
         return (
           <Card key={event.eventId} style={{ marginBottom: "20px" }}>
             <Card.Header>
-              {`${event.hostUsername} is hosting this events in ${dateCounter}`}
+              {`${event.hostUsername} is hosting this event in ${dateCounter}`}
             </Card.Header>
             <Card.Body>
               <Card.Title>{event.title}</Card.Title>
@@ -42,7 +42,7 @@ function FeedCards({ followerEvents }) {
               </Card.Title>
               <Card.Text>{event.description}</Card.Text>
               <Link to={`/events/${event.eventId}`}>
-                <Button variant="primary">View Event</Button>
+                <Button variant="outline-primary">View Event</Button>
               </Link>
             </Card.Body>
           </Card>

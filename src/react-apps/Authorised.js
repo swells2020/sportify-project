@@ -6,7 +6,6 @@ import { db } from "../config/firebase";
 import { useAuth } from "../react-contexts/AuthenticationContext";
 import UserContext from "../react-contexts/UserContext";
 import NavBar from "../react-components/NavBar";
-import Header from "../react-components/Header";
 import Home from "../react-components/Home";
 import SingleEvent from "../react-components/SingleEvent";
 import UserProfile from "../react-components/UserProfile";
@@ -14,6 +13,7 @@ import Schedule from "../react-components/Schedule";
 import WishList from "../react-components/WishList";
 import PageNotFound from "../react-components/PageNotFound";
 import Feed from "../react-components/Feed";
+import Footer from "../react-components/Footer";
 
 const Authorised = (props) => {
   const { currentUser } = useAuth();
@@ -40,6 +40,7 @@ const Authorised = (props) => {
           <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Footer />
         <NavBar />
       </Container>
     </UserContext.Provider>

@@ -48,7 +48,12 @@ function Feed() {
 
   return (
     <>
-      <h2>Your feed</h2>
+    <div
+        style={{
+          height: "10px",
+          marginTop: "5px",
+        }}
+      ></div>
       {isLoading ? (
      <Container className="text-center" style={{minHeight: "1000px"}}>
         <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"

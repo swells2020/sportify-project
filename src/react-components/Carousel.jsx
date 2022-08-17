@@ -1,4 +1,5 @@
 import Carousel from "react-bootstrap/Carousel";
+import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -26,8 +27,9 @@ function LocationsCarousel({ events, selectedLocation }) {
               className="event-item"
               key={event.id}
               style={{
-                background: `linear-gradient(rgba(90,90,90,0.5), rgba(90,90,90,0.5)), url(${event.imageURL})`,
-                height: "200px",
+                background: `linear-gradient(rgba(90,90,90,0.5), rgba(90,90,90,0.5)), url(${event.photoURL})`,
+                height: "100%",
+                width: "100%",
                 backgroundSize: "cover",
                 color: "#f2f4f3",
                 borderRadius: "20px",
@@ -36,7 +38,7 @@ function LocationsCarousel({ events, selectedLocation }) {
               <h3>{event.title}</h3>
               <p>{event.level}</p>
               <Link to={`/events/${event.id}`}>
-                <p>View event</p>
+                <Button variant="light">View event </Button>
               </Link>
             </Carousel.Item>
           );
