@@ -13,9 +13,7 @@ import {
 } from 'firebase/firestore';
 import UserContext from '../react-contexts/UserContext';
 import { db } from '../config/firebase';
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Container, Button, Accordion, Modal, Spinner } from "react-bootstrap";
 
 function HostedEvents() {
   const user = useContext(UserContext);
@@ -23,6 +21,8 @@ function HostedEvents() {
   const currDate = ~~(+new Date() / 1000);
   const [show, setShow] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [deleteIsLoading, setDeleteIsLoading] = useState(false);
 
   const handleShow = (event) => {
     setSelectedEvent(event);
@@ -31,6 +31,7 @@ function HostedEvents() {
 
   const handleClose = () => setShow(false);
   const handleDelete = () => {
+    setDeleteIsLoading(true);
     setShow(false);
     console.log('cancelling event');
     // delete from events
@@ -49,12 +50,14 @@ function HostedEvents() {
           events: arrayRemove(selectedEvent.id),
         });
       });
+      setDeleteIsLoading(false);
     });
 
     // delete from all users wishlist
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (user.events) {
       const q = query(
         collection(db, 'events'),
@@ -68,6 +71,7 @@ function HostedEvents() {
             return [...prev, eventWithId];
           });
         });
+        setIsLoading(false);
       });
     }
   }, [user]);
@@ -88,6 +92,17 @@ function HostedEvents() {
         </Modal.Footer>
       </Modal>
       {hostedEvents && (
+        <>
+        {isLoading ? (
+       <Container className="text-center" style={{minHeight: "1000px"}}>
+          <Spinner animation="border" role="status"  style={{ marginTop: "220px", width: "100px", height: "100px"
+          }}>
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+  
+        </Container>
+        ) : (
+          <>
         <Accordion defaultActiveKey="0">
           {hostedEvents.map((event) => {
             const date = new Date(event.date.seconds * 1000);
@@ -106,7 +121,14 @@ function HostedEvents() {
                 <Accordion.Body>
                   {event.date.seconds > currDate && (
                     <Button variant="primary" onClick={() => handleShow(event)}>
-                      Delete Event
+                      Delete Event{deleteIsLoading ?<Spinner
+          className="ms-2"
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        /> : <></>}
                     </Button>
                   )}
                 </Accordion.Body>
@@ -114,6 +136,8 @@ function HostedEvents() {
             );
           })}
         </Accordion>
+        </>)}
+        </>
       )}
     </div>
   );
