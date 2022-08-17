@@ -1,6 +1,6 @@
-import Nav from "react-bootstrap/Nav";
+
 import { useState } from "react";
-import { Navbar, NavDropdown } from "react-bootstrap";
+import { Navbar, NavDropdown, Nav } from "react-bootstrap";
 import {
   AiOutlineHome,
   AiOutlineBell,
@@ -9,6 +9,7 @@ import {
   AiOutlineHeart,
 } from "react-icons/ai";
 import { useAuth } from "../react-contexts/AuthenticationContext";
+import { useLocation } from 'react-router-dom';
 import "./navbar.css";
 
 function NavBar({ setShow }) {

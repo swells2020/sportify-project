@@ -5,11 +5,10 @@ import {
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
-  updateProfile,
 } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { addDoc, collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 
 const AuthenticationContext = createContext();
 const storage = getStorage();
@@ -30,7 +29,8 @@ export async function getEvents (username) {
   const querySnapshot = await getDocs(q);
   const userEvents = []
   querySnapshot.forEach((doc) => {
-      userEvents.push(doc.data());
+
+      userEvents.push({...doc.data(), eventId: doc.id});
   })
   return userEvents;
 }
