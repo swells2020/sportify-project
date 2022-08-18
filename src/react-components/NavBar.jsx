@@ -9,19 +9,24 @@ import {
   AiOutlineHeart,
 } from "react-icons/ai";
 import { useAuth } from "../react-contexts/AuthenticationContext";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./navbar.css";
+
 
 function NavBar({ setShow }) {
   const [error, setError] = useState();
   const { currentUser } = useAuth();
   const handleShow = () => setShow(true);
   const { logOut } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   async function handleSignOut() {
     setError("");
     try {
       await logOut();
+      navigate("/home")
+      
     } catch {
       setError("Failed to sign out, please try again");
     }
@@ -34,6 +39,7 @@ function NavBar({ setShow }) {
       style={{ borderTop: "1px solid #bebebe", height: "60px" }}
     >
       <Nav.Item
+      className={location.pathname === "/" ? "text-primary" : ""}
         style={{
           padding: "10px",
           paddingRight: "30px",
@@ -47,6 +53,7 @@ function NavBar({ setShow }) {
         Home
       </Nav.Item>
       <Nav.Item
+      className={location.pathname.includes("/users")  ? "text-primary" : ""}
         style={{
           padding: "10px",
           paddingRight: "30px",
@@ -70,6 +77,7 @@ function NavBar({ setShow }) {
         Profile
       </Nav.Item>
       <Nav.Item
+      className={location.pathname === "/schedule" ? "text-primary" : ""}
         style={{
           padding: "10px",
           paddingRight: "30px",
@@ -89,6 +97,7 @@ function NavBar({ setShow }) {
         Schedule
       </Nav.Item>
       <Nav.Item
+      className={location.pathname === "/feed" ? "text-primary" : ""}
         style={{
           padding: "10px",
           paddingRight: "30px",
@@ -108,6 +117,7 @@ function NavBar({ setShow }) {
         Feed
       </Nav.Item>
       <Nav.Item
+      className={location.pathname === "/wishlist" ? "text-primary" : ""}
         style={{ padding: "10px", textAlign: "center", fontSize: "12px" }}
       >
         {currentUser ? (

@@ -3,10 +3,9 @@ import { Alert, Button, Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../react-contexts/AuthenticationContext";
 
-const PasswordReset = ({ setLoginComponent }) => {
+const PasswordReset = ({ setLoginComponent}) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
-
   const emailRef = useRef();
   const navigate = useNavigate();
   const { resetPassword } = useAuth();
@@ -27,7 +26,7 @@ const PasswordReset = ({ setLoginComponent }) => {
 
   return (
     <Modal.Body>
-      <h2 className="text-center mb-4">Log In</h2>
+      <h2 className="text-center mb-4">Password Reset</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group id="email">

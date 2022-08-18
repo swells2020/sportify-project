@@ -25,13 +25,13 @@ const Unauthorised = (props) => {
         <nav>
           <Modal show={show} onHide={handleClose}>
             {loginComponent === "Log In" ? (
-              <Login setLoginComponent={setLoginComponent} />
+              <Login setLoginComponent={setLoginComponent} setShow={setShow}/>
             ) : null}
             {loginComponent === "Sign Up" ? (
-              <SignUp setLoginComponent={setLoginComponent} />
+              <SignUp setLoginComponent={setLoginComponent} setShow={setShow}/>
             ) : null}
             {loginComponent === "Forgotten Password" ? (
-              <PasswordReset setLoginComponent={setLoginComponent} />
+              <PasswordReset setLoginComponent={setLoginComponent}/>
             ) : null}
           </Modal>
         </nav>
