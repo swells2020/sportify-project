@@ -100,14 +100,14 @@ function SingleEvent() {
   let button;
   if (!currentUser) {
     button = (
-      <Link to="/login">
+   
         <Button
           variant="outline-primary"
           style={{ marginBottom: "10px", width: "100%" }}
         >
           LogIn to book this event
         </Button>
-      </Link>
+      
     );
   } else if (booked) {
     button = (

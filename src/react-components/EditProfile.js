@@ -6,7 +6,8 @@ import {
   Modal,
   InputGroup,
   CloseButton,
-  Spinner
+  Spinner,
+  Container
 } from "react-bootstrap";
 import { useState } from "react";
 import { Timestamp, doc, updateDoc } from "firebase/firestore";
@@ -221,7 +222,7 @@ const EditProfile = ({ userInfo }) => {
               value={newUserInfo.bio}
               onChange={handleBioChange}
             />
-            <Card className="mb-3">
+            <Container className="mb-3">
               <Form.Group>
                 <Form.Check
                   inline
@@ -296,7 +297,7 @@ const EditProfile = ({ userInfo }) => {
                   checked={newUserInfo.sports.includes("Cycling")}
                 />
               </Form.Group>
-            </Card>
+            </Container>
             <Button type="submit">Save Changes{saveIsLoading ?<Spinner
           className="ms-2"
           as="span"
