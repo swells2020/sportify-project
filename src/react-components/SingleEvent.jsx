@@ -77,7 +77,10 @@ function SingleEvent() {
   useEffect(() => {
     const docRef = doc(db, "events", eventId);
     getDoc(docRef).then((data) => {
-      setSingleEvent({ ...data.data(), eventId });
+      const date = new Date(data.data().date.seconds * 1000);
+      const time = date.toLocaleTimeString("en-UK");
+      const timeZoneDate = date.toLocaleDateString("en-UK");
+      setSingleEvent({ ...data.data(), eventId, date: timeZoneDate, time: time });
     });
     if (user) {
       setOnWishList(user.wishlist.includes(eventId));
@@ -155,7 +158,7 @@ function SingleEvent() {
             style={{ height: "100%", width: "100%", borderRadius: "20px" }}
           />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h2 style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+            <h2 style={{ paddingTop: "10px", paddingBottom: "5px" }}>
               {singleEvent.title}
             </h2>
             {user && (
@@ -184,12 +187,19 @@ function SingleEvent() {
               </div>
             )}
           </div>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <p style={{ padding: "2px" }}>Sport: {singleEvent.type}</p>
-            <p style={{ padding: "2px" }}>Level: {singleEvent.level}</p>
-
-            <p style={{ padding: "2px" }}>
+          <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "2px" }}>
+            <p style={{ padding: "5px", marginBottom: "2px" }}>Sport: {singleEvent.type}</p>
+            <p style={{ padding: "5px", marginBottom: "2px" }}>Level: {singleEvent.level}</p>
+            <p style={{ padding: "5px", marginBottom: "2px" }}>
               Capacity: {singleEvent.participants.length}/{singleEvent.capacity}
+            </p>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <p style={{ padding: "2px" }}>
+              Date: {singleEvent.date}
+            </p>
+            <p style={{ padding: "2px" }}>
+              Time: {singleEvent.time}
             </p>
           </div>
 

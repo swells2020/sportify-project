@@ -22,6 +22,7 @@ function LocationsCarousel({ events, selectedLocation }) {
     <div className="events-carousel-container">
       <Carousel interval={null} activeIndex={index}>
         {events.map((event) => {
+          const date = new Date(event.date.seconds * 1000);
           return (
             <Carousel.Item
               className="event-item"
@@ -36,7 +37,9 @@ function LocationsCarousel({ events, selectedLocation }) {
               }}
             >
               <h3>{event.title}</h3>
-              <p>{event.level}</p>
+              <p className="mb-1">{event.level}</p>
+              <p>{date.toLocaleTimeString("en-UK")},{" "}
+                {date.toLocaleDateString("en-UK")}</p>
               <Link to={`/events/${event.id}`}>
                 <Button variant="light">View event </Button>
               </Link>
