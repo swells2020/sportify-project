@@ -25,7 +25,7 @@ function NavBar({ setShow }) {
     setError("");
     try {
       await logOut();
-      navigate("/home")
+      navigate("/")
       
     } catch {
       setError("Failed to sign out, please try again");

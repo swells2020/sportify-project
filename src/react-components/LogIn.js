@@ -20,7 +20,7 @@ const Login = ({ setLoginComponent, setShow }) => {
       setError("");
       setLoading(true);
       await logIn(emailRef.current.value, passwordRef.current.value);
-      navigate("/home");
+      navigate("/");
     } catch {
       setError("Failed to log in, please try again.");
       setLoading(false);
