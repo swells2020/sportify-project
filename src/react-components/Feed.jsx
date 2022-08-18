@@ -19,6 +19,7 @@ function Feed() {
 
   useEffect(() => {
     if (user.following) {
+      console.log(user.following)
       setIsLoading(true);
       const docRef = doc(db, "users", user.uid);
       getDoc(docRef)

@@ -11,18 +11,12 @@ const UserTiles = ({ userArray }) => {
     const collectionRef = collection(db, "users");
     getDocs(collectionRef).then((querySnapShot) => {
       querySnapShot.forEach((documentSnapshot) => {
-        console.log(
-          userArray,
-          documentSnapshot.data().uid,
-          userArray.includes(documentSnapshot.data().uid)
-        );
         if (userArray.includes(documentSnapshot.data().uid)) {
           setCardDetails((currenDetails) => [
             ...currenDetails,
             documentSnapshot.data(),
           ]);
         }
-        console.log(cardDetails);
       });
     });
   }, [userArray]);
@@ -32,14 +26,14 @@ const UserTiles = ({ userArray }) => {
       <Row>
         {cardDetails.map((user) => {
           return (
-            <Card key={user.uid}>
-              <Image
-                style={{ width: "150px", height: "150px" }}
-                src={user.photoURL}
-                roundedCircle="true"
-              ></Image>
-              {user.username}
-            </Card>
+            <div key={user.uid} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-around"}}>
+                <Image
+                  style={{ width: "100px", height: "100px" }}
+                  src={user.photoURL}
+                  roundedCircle="true"
+                ></Image>
+                {user.username}
+            </div>
           );
         })}
       </Row>
