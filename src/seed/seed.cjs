@@ -27,7 +27,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.homerSimpson,
   },
   {
     testuid: 2,
@@ -46,7 +46,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.margeSimpson,
   },
   {
     testuid: 3,
@@ -65,7 +65,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.bartSimpson,
   },
   {
     testuid: 4,
@@ -84,15 +84,15 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.lisaSimspon,
   },
   {
     testuid: 5,
     username: "Lenny",
     email: "Lenny@gmail.com",
-    firstName: "Margaret",
-    lastName: "Simpson",
-    gender: "Female",
+    firstName: "Lenny",
+    lastName: "Leonard",
+    gender: "Male",
     DOB: Timestamp.fromDate(new Date(1989, 0, 14)),
     location: "manchester",
     sports: ["Running", "Cycling"],
@@ -103,7 +103,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.lenny,
   },
   {
     testuid: 6,
@@ -122,7 +122,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.apu,
   },
   {
     testuid: 7,
@@ -141,7 +141,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.nedFlanders,
   },
   {
     testuid: 8,
@@ -160,7 +160,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.abeSimpson,
   },
   {
     testuid: 9,
@@ -179,7 +179,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.mrBurns,
   },
   {
     testuid: 10,
@@ -207,7 +207,7 @@ const users = [
     wishlist: [],
     hostRating: [],
     password: "test123",
-    photoURL: avatar.photoURL,
+    photoURL: avatar.smithers,
   },
 ];
 
