@@ -107,7 +107,7 @@ const UserProfile = () => {
             ) : (
               <p>{userInfo.followers.length} Followers</p>
             )}
-            {userAuth === userInfo.uid ? (
+            {userAuth.uid === userInfo.uid ? (
 
               <EditProfile userInfo={userInfo} />
             ) : (
