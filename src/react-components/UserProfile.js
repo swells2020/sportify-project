@@ -160,10 +160,10 @@ const UserProfile = () => {
               </Row>
 
               {userInfo.followers.length > 0 && (
-                <>
-                  <h2>Followers</h2>
+                <Container  className="p-0 mt-3 text-start">
+                  <h3>Followers</h3>
                   <UserTiles userArray={userInfo.followers}></UserTiles>
-                </>
+                </Container>
               )}
             </Container>
             <UserEvents userInfo={userInfo} />
