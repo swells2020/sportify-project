@@ -327,7 +327,7 @@ const events = [
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 6, 09, 00)),
     location: "Hassop Station",
-    type: "Yoga",
+    type: "Running",
     capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
@@ -342,7 +342,7 @@ const events = [
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 13, 09, 00)),
     location: "Hassop Station",
-    type: "Yoga",
+    type: "Running",
     capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
@@ -357,7 +357,7 @@ const events = [
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 20, 09, 00)),
     location: "Hassop Station",
-    type: "Yoga",
+    type: "Running",
     capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
@@ -372,7 +372,7 @@ const events = [
     title: "Monsal Trail Parkrun",
     date: Timestamp.fromDate(new Date(2022, 7, 27, 09, 00)),
     location: "Hassop Station",
-    type: "Yoga",
+    type: "Running",
     capacity: 25,
     description:
       "Come join us each Saturday morning at 9am for the Monsal Trail parkrun. If you would like to recieve a time, please remember to bring your barcode. If you would like a barcode, please register for one at www.parkrun.co.uk. Parking is limited so please use public transport where possible!",
@@ -388,7 +388,7 @@ const events = [
     hostUsername: "ChucklesWJS",
     tags: ["#runnersworld", "#backtonature"],
     geolocation: { lat: 53.5495, lng: -2.543 },
-    photoURL: avatar.yoga,
+    photoURL: avatar.running,
   },
   {
     title: "Bank Holiday Snowboarding at Tamworth",
